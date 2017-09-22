@@ -7,6 +7,7 @@ import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.util.ParameterCheck;
 
 import com.tieto.ecm.alfresco.monitor.storage.MonitorStorage;
+import com.tieto.ecm.alfresco.monitor.storage.model.JobOperation;
 import com.tieto.ecm.alfresco.monitor.storage.model.MonitorModel;
 
 public class NodesHierarchyJobImpl extends BaseProcessorExtension implements NodesHierarchyJob {
@@ -35,6 +36,7 @@ public class NodesHierarchyJobImpl extends BaseProcessorExtension implements Nod
 	            public NodeRef execute() throws Throwable {
 	                //Create a download node
 	                final NodeRef monitorNode = monitorStorage.createMonitorJobNode(MonitorModel.TYPE_MONITOR_NODES_HIERARCHY);
+	                monitorStorage.setOperation(monitorNode, JobOperation.NODES_HIERARCHY);
 	                //Add requested nodes
 	                if (sourcePathNodeRef != null){
 	                	monitorStorage.addSourcePathNode(monitorNode, sourcePathNodeRef);

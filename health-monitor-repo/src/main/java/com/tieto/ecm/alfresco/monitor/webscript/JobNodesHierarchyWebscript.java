@@ -31,9 +31,13 @@ public class JobNodesHierarchyWebscript extends DeclarativeWebScript{
 		this.monitorService = monitorService;
 	}
 
+	public void setRepositoryHelper(Repository repositoryHelper) {
+		this.repositoryHelper = repositoryHelper;
+	}
+
 	@Override
 	protected Map<String, Object> executeImpl(WebScriptRequest req, Status status, Cache cache) {
-		
+		LOGGER.debug("Initiate run calculation");
 		final NodeRef jobNode = job.createNodesHierarchyJob(repositoryHelper.getCompanyHome());
 		monitorService.runMonitorOperation(jobNode);
 		

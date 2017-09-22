@@ -8,7 +8,7 @@ package com.tieto.ecm.alfresco.monitor.storage.model;
  * @version 1.0
  */
 public enum JobOperation {
-	
+	NONE,
 	NODES_HIERARCHY,
 	PERMISSION_GROUPS_HIERARCHY,
 	SITES_COUNT;

@@ -7,6 +7,7 @@ import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.util.ParameterCheck;
 
 import com.tieto.ecm.alfresco.monitor.storage.MonitorStorage;
+import com.tieto.ecm.alfresco.monitor.storage.model.JobOperation;
 import com.tieto.ecm.alfresco.monitor.storage.model.MonitorModel;
 
 public class AclHierarchyJobImpl extends BaseProcessorExtension implements AclHierarchyJob {
@@ -33,6 +34,7 @@ public class AclHierarchyJobImpl extends BaseProcessorExtension implements AclHi
             @Override
             public NodeRef execute() throws Throwable {
             	final NodeRef monitorNode = monitorStorage.createMonitorJobNode(MonitorModel.TYPE_MONITOR_ACL_HIERARCHY);
+            	monitorStorage.setOperation(monitorNode, JobOperation.NODES_HIERARCHY);
             	monitorStorage.addDepth(monitorNode, depth);
                 return monitorNode;
             }

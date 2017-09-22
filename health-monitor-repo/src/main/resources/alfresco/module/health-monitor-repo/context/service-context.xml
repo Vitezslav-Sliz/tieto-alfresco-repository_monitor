@@ -70,6 +70,11 @@
       <property name="actionName" value="monitor_job_sitesCount" />
 	</bean>
 	
+	<bean id="health-monitor-repo_abstractExecuterAction" class="com.tieto.ecm.alfresco.dong.bulk.engine.AbstractBulkExecuterAction" abstract="true">
+		<property name="monitorStorage" ref="health-monitor-repo_MonitorStorage"/>
+		<property name="transactionHelper" ref="retryingTransactionHelper"/>
+	</bean>
+	
 	<bean id="monitorGroupsService"
 		class="com.tieto.ecm.alfresco.monitor.groups.service.MonitorGroupsService">
 		<property name="authorityService" ref="AuthorityService" />

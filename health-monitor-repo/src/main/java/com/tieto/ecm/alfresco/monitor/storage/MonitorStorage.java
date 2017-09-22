@@ -203,4 +203,10 @@ public class MonitorStorage {
 		final String oper = (String)nodeService.getProperty(monitorNodeRef, MonitorModel.PROP_OPERATION);
 		return JobOperation.valueOf(oper.toUpperCase());
 	}
+
+	public void setOperation(NodeRef monitorNode, JobOperation operation) {
+		validateMonitorNode(monitorNode,MonitorModel.TYPE_MONITOR);
+		nodeService.setProperty(monitorNode, MonitorModel.PROP_OPERATION, operation);
+		
+	}
 }

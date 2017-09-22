@@ -81,7 +81,7 @@ public class MonitorServiceImpl extends BaseProcessorExtension implements Monito
 				action.executeAction(monitorNodeRef);
 			}else{
 				LOGGER.error("Not registered action for type: MonitorAction.{}",oper);
-				throw new AlfrescoRuntimeException(String.format("Not registered action for type: MOnitorAction.%s", oper));
+				throw new AlfrescoRuntimeException(String.format("Not registered action for type: MonitorAction.%s", oper));
 			}
 		}
 	}
