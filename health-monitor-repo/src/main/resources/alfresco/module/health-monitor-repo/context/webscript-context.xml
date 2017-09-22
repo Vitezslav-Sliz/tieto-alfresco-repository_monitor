@@ -24,6 +24,7 @@
 		class="com.tieto.ecm.alfresco.monitor.groups.webscript.MonitorGroupData"
 		parent="webscript">
 		<property name="nodeService" ref="NodeService" />
+		<property name="monitorGroupsService" ref="monitorGroupsService" />
 	</bean>
 	
 </beans>
