@@ -1,0 +1,9 @@
+<webscript>
+	<shortname>Bootstrap script to create sample data</shortname>
+	<description>Script will create users, groups (including membership), nested groups, sites (on repository level only), site membership, create predefined folder structure and number of nodes in sites. Add true or false values to URL parameters. At first you can put true for all values.</description>
+	<family>Tieto Custom Web Script</family>
+	<url>/tieto/bootstrap-script?user={user?}&amp;group={group?}&amp;membership={membership?}&amp;nestedgroups={nestedgroups?}&amp;sites={sites?}&amp;sitemembers={sitemembers?}&amp;structure={structure?}</url>
+	<format default="json"/>
+	<authentication>admin</authentication>
+	<transaction>required</transaction>
+</webscript>

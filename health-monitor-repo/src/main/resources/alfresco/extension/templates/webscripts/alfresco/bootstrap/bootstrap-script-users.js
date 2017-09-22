@@ -1,0 +1,22 @@
+var usersToBeCreated = [
+	    {"firstName":"Firstname1", "lastName":"Lastname1", "userName":"User1", "email":"User1@ecmova.com", "password":"User1", "enableAccount":true, "setQuota":"-1"},
+		{"firstName":"Firstname2", "lastName":"Lastname2", "userName":"User2", "email":"User2@ecmova.com", "password":"User2", "enableAccount":true, "setQuota":"-1"},
+		{"firstName":"Firstname3", "lastName":"Lastname3", "userName":"User3", "email":"User3@ecmova.com", "password":"User3", "enableAccount":true, "setQuota":"-1"},
+		{"firstName":"Firstname4", "lastName":"Lastname4", "userName":"User4", "email":"User4@ecmova.com", "password":"User4", "enableAccount":true, "setQuota":"-1"},
+		{"firstName":"Firstname5", "lastName":"Lastname5", "userName":"User5", "email":"User5@ecmova.com", "password":"User5", "enableAccount":true, "setQuota":"-1"},
+		{"firstName":"Firstname6", "lastName":"Lastname6", "userName":"User6", "email":"User6@ecmova.com", "password":"User6", "enableAccount":true, "setQuota":"-1"},
+		{"firstName":"Firstname7", "lastName":"Lastname7", "userName":"User7", "email":"User7@ecmova.com", "password":"User7", "enableAccount":true, "setQuota":"-1"},
+		{"firstName":"Firstname8", "lastName":"Lastname8", "userName":"User8", "email":"User8@ecmova.com", "password":"User8", "enableAccount":true, "setQuota":"-1"},
+		{"firstName":"Firstname9", "lastName":"Lastname9", "userName":"User9", "email":"User9@ecmova.com", "password":"User9", "enableAccount":true, "setQuota":"-1"},
+		{"firstName":"Firstname10", "lastName":"Lastname10", "userName":"User10", "email":"User10@ecmova.com", "password":"User10", "enableAccount":true, "setQuota":"-1"},
+		{"firstName":"Firstname11", "lastName":"Lastname11", "userName":"User11", "email":"User11@ecmova.com", "password":"User11", "enableAccount":true, "setQuota":"-1"},
+		{"firstName":"Firstname12", "lastName":"Lastname12", "userName":"User12", "email":"User12@ecmova.com", "password":"User12", "enableAccount":true, "setQuota":"-1"},
+		{"firstName":"Firstname13", "lastName":"Lastname13", "userName":"User13", "email":"User13@ecmova.com", "password":"User13", "enableAccount":true, "setQuota":"-1"},
+		{"firstName":"Firstname14", "lastName":"Lastname14", "userName":"User14", "email":"User14@ecmova.com", "password":"User14", "enableAccount":true, "setQuota":"-1"},
+		{"firstName":"Firstname15", "lastName":"Lastname15", "userName":"User15", "email":"User15@ecmova.com", "password":"User15", "enableAccount":true, "setQuota":"-1"},
+		{"firstName":"Firstname16", "lastName":"Lastname16", "userName":"User16", "email":"User16@ecmova.com", "password":"User16", "enableAccount":true, "setQuota":"-1"},
+		{"firstName":"Firstname17", "lastName":"Lastname17", "userName":"User17", "email":"User17@ecmova.com", "password":"User17", "enableAccount":true, "setQuota":"-1"},
+		{"firstName":"Firstname18", "lastName":"Lastname18", "userName":"User18", "email":"User18@ecmova.com", "password":"User18", "enableAccount":true, "setQuota":"-1"},
+		{"firstName":"Firstname19", "lastName":"Lastname19", "userName":"User19", "email":"User19@ecmova.com", "password":"User19", "enableAccount":true, "setQuota":"-1"},
+		{"firstName":"Firstname20", "lastName":"Lastname20", "userName":"User20", "email":"User20@ecmova.com", "password":"User20", "enableAccount":true, "setQuota":"-1"}
+];
