@@ -26,4 +26,10 @@
 		<property name="nodeService" ref="NodeService" />
 	</bean>
 	
+	
+	<bean id="webscript.com.tieto.ecm.alfresco.monitor.job_nodesHierarchy.get" class="com.tieto.ecm.alfresco.monitor.webscript.JobNodesHierarchyWebscript" parent="webscript">
+	      <property name="job" ref="health-monitor-repo_MonitorJobNodesHierarchy"/>
+	      <property name="monitorService" ref="health-monitor-repo_MonitorService"/>
+	      <property name="repositoryHelper" ref="repositoryHelper"/>
+    </bean>
 </beans>
