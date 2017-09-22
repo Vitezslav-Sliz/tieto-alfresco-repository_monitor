@@ -20,7 +20,16 @@
  * Linked to Alfresco
  * Copyright (C) 2005-2017 Alfresco Software Limited.
  */
-function dummyMethod()
+function getSitesCount()
 {
+ 
+ 	var node = search.findNode('workspace://SpacesStore/38c66bd0-40ca-4de3-bf5f-206de85d64b55'); 
+
+ 	if (!node) {
+ 		model.node = {'sitesCount': 8};
+ 	} else {
+		model.node = jsonUtils.toObject(node.content);	 		
+ 	}
+	
    
 }
