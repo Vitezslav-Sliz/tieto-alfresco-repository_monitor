@@ -23,7 +23,7 @@
 
 function getAllVersions(path) {
 	var tietoFolder = companyhome.childByNamePath(path).getChildren();
-	var versionsList = "[";
+	var versionsList = "\'[";
 	for (var i = 0; i < tietoFolder.length; i++) {
 		versionsList +=("{\"nodeRef\":\"" + tietoFolder[i].getNodeRef() + "\" , \"path\":\"" + tietoFolder[i].displayPath + "/" + tietoFolder[i].name + "\", \"count\": \"1521\", \"data\": " + tietoFolder[i].content + " }");
 		if (i < tietoFolder.length - 1) {
@@ -31,9 +31,11 @@ function getAllVersions(path) {
 		}
 		//logger.debug(versionsList[i]);
 	}
-	versionsList += "]";
+	versionsList += "]\'";
 
-	return versionsList;
+	// Remove new lines
+	//return jsonUtils.toJSONObject(versionsList.replace(/(\r\n|\n|\r)/gm,""));
+	return versionsList.replace(/(\r\n|\n|\r)/gm,"");
 }
 
 /*
