@@ -1,8 +1,20 @@
 {
-	"time":"2017-09-22-14-35",
-	"server":"host",
-	"data":{
-		"count":[{node1},{node2},{node3}...],
-		"depth":[{folder1},{folder2},{folder3}...]
-	}
+	"time": "2017-09-22-14-35",
+	"server": "host",
+	"data": {
+		"count": [{
+			"node": "Blabla Count"
+		}, {
+			"node": "Cau Count"
+		}, {
+			"node": "Solr Count"
+		}]
+	},
+	"depth": [{
+		"node": "Blabla Depth"
+	}, {
+		"node": "Cau Depth"
+	}, {
+		"node": "Solr Depth"
+	}]
 }
