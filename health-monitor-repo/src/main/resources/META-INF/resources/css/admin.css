@@ -1,0 +1,74 @@
+div.main-wrapper > div.main,
+.dialog-body div.navigation-wrapper div.main,
+.main .column-full table
+{
+	width: 100%;
+}
+
+.dialog-body div.navigation-wrapper div.main
+{
+	float: none;
+}
+
+/* use as much space as possible */
+body > iframe.dialog
+{
+    left: 5%;
+    width: 90%;
+}
+
+
+/* for whatever reason default admin.css does not include left / right padding */
+table.results td,
+table.results th
+{
+	padding-left: 4px;
+    padding-right: 4px;
+}
+
+table.results tr:nth-child(even)
+{
+   background-color: #f8f8f8;
+}
+
+/* override collapse from jQuery tables */
+table.results.dataTable
+{
+	border-collapse: collapse;
+}
+
+.intro
+{
+    margin-bottom:  10px;
+    padding-bottom: 10px;
+    padding-top:    20px;
+}
+
+.section > .dataTables_wrapper > .dataTables_filter
+{
+	float: left;
+	text-align: left;
+}
+
+.main-wrapper .buttons
+{
+	clear: both;
+	padding: 16px 0 8px;
+}
+
+.main-wrapper .tab-controls.buttons
+{
+    padding: 16px 0 0;
+}
+
+table.data td.numericalCellValue
+{
+	text-align: right;
+}
+
+input[type="text"]
+{
+	height: 24px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
