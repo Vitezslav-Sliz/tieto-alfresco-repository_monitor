@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <webscript>
-    <shortname>Filip Testing</shortname>
-    <description>Filip Testing info</description>
+    <shortname>Folder Hierarchy</shortname>
+    <description>Folder Hierarchy</description>
     <url>/tieto/healthy-addon/folder-hierarchy</url>
     <family>AdminConsole</family>
     <family>Tieto Healthy Addon</family>

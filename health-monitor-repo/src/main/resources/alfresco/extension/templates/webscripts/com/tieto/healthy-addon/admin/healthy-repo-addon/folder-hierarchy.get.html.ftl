@@ -1,6 +1,6 @@
 <#include "../admin-template.ftl" />
 
-<@page title=msg("admin-console.tool.filip-test.section") readonly=true>
+<@page title=msg("admin-console.tool.folder-hierarchy.section") readonly=true>
 
     <#list coreNames as coreName>
         <div class="column-full">
