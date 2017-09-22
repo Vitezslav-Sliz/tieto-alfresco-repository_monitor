@@ -1,6 +1,6 @@
 <#include "../admin-template.ftl" />
 
-<@page title=msg("admin-console.tool.folder-hierarchy.section") readonly=true>
+<@page title=msg("admin-console.tool.folder-hierarchy.section") customJSFiles=["js/jquery-3.2.1.min.js"] readonly=true>
 	<h1>Hello from ftl!</h1>
 	Time: ${node.time}</br>
 	Server: ${node.server}</br>
