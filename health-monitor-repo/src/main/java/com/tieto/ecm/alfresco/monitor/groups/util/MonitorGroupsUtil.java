@@ -130,11 +130,8 @@ public final class MonitorGroupsUtil {
 		model.put(MonitorGroupsUtil.TIME, LocalDateTime.now().toString());
 		model.put(MonitorGroupsUtil.SERVER, "HOST");
 		
-		String groups = "[[\"Group1\",\"Group2\",\"Group3\",\"Group4\",\"Group5\",\"Group6\"],[\"Group1\",\"Group2\",\"Group3\",\"Group4\",\"Group5\",\"Group6\",\"Group7\"]]";
-//		List<List<String>> groupOfGroups = new ArrayList<>();
-//		groupOfGroups.add(Stream.of("Group1","Group2","Group3","Group4","Group5","Group6").collect(Collectors.toList()));
-//		groupOfGroups.add(Stream.of("Group1","Group2","Group3","Group4","Group5","Group6","Group7").collect(Collectors.toList()));
-//		model.put(MonitorGroupsUtil.DATA,new JSONObject(groupOfGroups).toString());
+		String groups = "[[\"Group7\",\"Group6\",\"Group5\",\"Group4\",\"Group3\",\"Group2\"],[\"Group7\",\"Group6\",\"Group5\",\"Group4\",\"Group3\",\"Group2\",\"Group1\"]]";
+
 		model.put(MonitorGroupsUtil.DATA,groups);
 		Map<String, Object> resultMap = new HashMap<>();
 		resultMap.put(MODEL, new JSONObject(model).toString());
