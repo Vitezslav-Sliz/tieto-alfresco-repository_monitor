@@ -2,19 +2,35 @@
 
 <@page title=msg("admin-console.tool.folder-hierarchy.section") customJSFiles=["js/jquery-3.2.1.min.js"] readonly=true>
 	<h1>Hello from ftl!</h1>
-	Time: ${node.time}</br>
-	Server: ${node.server}</br>
-	Nodes that exceeded nodes count:</br>
-	<#list node.data.count as item>
-		NodeRef:${item.nodeRef}</br>
-		Path:${item.path}</br>
-		NodeCount:${item.nodeCount}</br>
-	</#list>
+	Time: <span id="time"></span></br>
+	Server: <span id="server"></span></br>
+	
 
-	Nodes that exceeded depth from root:</br>
-	<#list node.data.depth as item>
-		NodeRef:${item.nodeRef}</br>
-		Path:${item.path}</br>
-		NodeCount:${item.nodeCount}</br>
-	</#list>
+<script>
+var selected = 0;
+var versionInJson = $.parseJSON(${versions});
+
+function render() {
+	var currentVersion = versionInJson[selected];
+	$("#time").text(currentVersion.time);
+	$("#server").text(currentVersion.server);
+}
+
+$(function() {
+	selected = 0;
+	versionInJson = $.parseJSON(${versions});
+	alert("function = " + versionInJson);
+	render();
+});
+
+
+
+$("#versionSelect").change(function() {
+	alert("Ahoj " + $("#versionSelect").val());
+})
+
+
+
+
+</script>
 </@page>

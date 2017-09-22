@@ -21,13 +21,26 @@
  * Copyright (C) 2005-2017 Alfresco Software Limited.
  */
 
-function getAllVersions () {
-	logger.error("Find all JSONs ");
+function getAllVersions(path) {
+	var tietoFolder = companyhome.childByNamePath(path).getChildren();
+	var versionsList = "[";
+	for (var i = 0; i < tietoFolder.length; i++) {
+		versionsList +=("{\"nodeRef\":\"" + tietoFolder[i].getNodeRef() + "\" , \"path\":\"" + tietoFolder[i].displayPath + "/" + tietoFolder[i].name + "\", \"count\": \"1521\", \"data\": " + tietoFolder[i].content + " }");
+		if (i < tietoFolder.length - 1) {
+			versionsList += ",";
+		}
+		//logger.debug(versionsList[i]);
+	}
+	versionsList += "]";
+
+	return versionsList;
 }
 
+/*
 function getFolderHierarchyReport() {
-	var node = search.findNode('workspace://SpacesStore/834f738c-7822-4af0-a939-497a2b10ffb9');
+	var array = model.allVersions;
 	logger.debug("Node = " + node.content);
 	
 	model.node = jsonUtils.toObject(node.content);
 }
+*/
