@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<webscript>
+    <shortname>Group Hierarchy</shortname>
+    <description>Group Hierarchy</description>
+    <url>/tieto/healthy-addon/groups-hierarchy</url>
+    <family>AdminConsole</family>
+    <family>Tieto Healthy Addon</family>
+    <format default="html"/>
+    <authentication>admin</authentication>
+    <lifecycle>internal</lifecycle>
+    <transaction allow="readonly">required</transaction>
+</webscript>
