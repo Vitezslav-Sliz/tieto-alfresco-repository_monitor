@@ -4,11 +4,14 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,6 +27,8 @@ import org.alfresco.error.AlfrescoRuntimeException;
 import org.alfresco.repo.domain.node.ContentDataWithId;
 import org.alfresco.service.namespace.NamespacePrefixResolver;
 import org.alfresco.service.namespace.QName;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -125,14 +130,31 @@ public final class MonitorGroupsUtil {
 		return map;
 	}
 	
-	public static Map<String, Object> getMonitoredNotValidGroups() {
+	public static Map<String, Object> getMonitoredNotValidGroups(Set<String> set, int deep) {
 		final Map<String, Object> model = new HashMap<>();
 		model.put(MonitorGroupsUtil.TIME, LocalDateTime.now().toString());
 		model.put(MonitorGroupsUtil.SERVER, "HOST");
 		
-		String groups = "[[\"Group7\",\"Group6\",\"Group5\",\"Group4\",\"Group3\",\"Group2\"],[\"Group7\",\"Group6\",\"Group5\",\"Group4\",\"Group3\",\"Group2\",\"Group1\"]]";
-
-		model.put(MonitorGroupsUtil.DATA,groups);
+		JSONArray data = new JSONArray();
+		for (Iterator iterator = set.iterator(); iterator.hasNext();) {
+			String string = (String) iterator.next();
+			String[] split = string.split("~");
+			
+			if (split.length <= deep)
+				continue;
+			
+			JSONArray arr = null;
+			try {
+				arr = new JSONArray(split);
+			} catch (JSONException e) {
+				logger.error(e.getMessage());
+				continue;
+			}
+			
+			data.put(arr);
+		}
+		
+		model.put(MonitorGroupsUtil.DATA,data.toString());
 		Map<String, Object> resultMap = new HashMap<>();
 		resultMap.put(MODEL, new JSONObject(model).toString());
 		return resultMap;
