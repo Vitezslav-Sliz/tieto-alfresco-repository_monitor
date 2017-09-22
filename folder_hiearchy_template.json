@@ -3,18 +3,30 @@
 	"server": "host",
 	"data": {
 		"count": [{
-			"node": "Blabla Count"
+			"nodeRef": "workspace://SpacesStore/6e8f1977-26fb-4d13-9558-d81f407b643c",
+			"path": "/app:company_home/st:sites/cm:site-2/cm:documentLibrary/cm:FolderLevel1/cm:FolderLevel2/cm:FolderLevel3/cm:FolderLevel4/cm:FolderLevel5/cm:FolderLevel6/cm:FolderLevel7/cm:FolderLevel8/cm:FolderLevel9/cm:FolderLevel10/cm:FolderLevel11/cm:FolderLevel12/cm:FolderLevel13/cm:FolderLevel14/cm:FolderLevel15/cm:FolderLevel16/cm:FolderLevel17/cm:FolderLevel18/cm:FolderLevel19",
+			"nodeCount": "10"
 		}, {
-			"node": "Cau Count"
+			"nodeRef": "workspace://SpacesStore/6e8f1977-26fb-4d13-9558-d81f407b643c",
+			"path": "/app:company_home/st:sites/cm:site-2/cm:documentLibrary/cm:FolderLevel1/cm:FolderLevel2/cm:FolderLevel3/cm:FolderLevel4/cm:FolderLevel5/cm:FolderLevel6/cm:FolderLevel7/cm:FolderLevel8/cm:FolderLevel9/cm:FolderLevel10/cm:FolderLevel11/cm:FolderLevel12/cm:FolderLevel13/cm:FolderLevel14/cm:FolderLevel15/cm:FolderLevel16/cm:FolderLevel17/cm:FolderLevel18/cm:FolderLevel19",
+			"nodeCount": "10"
 		}, {
-			"node": "Solr Count"
+			"nodeRef": "workspace://SpacesStore/6e8f1977-26fb-4d13-9558-d81f407b643c",
+			"path": "/app:company_home/st:sites/cm:site-2/cm:documentLibrary/cm:FolderLevel1/cm:FolderLevel2/cm:FolderLevel3/cm:FolderLevel4/cm:FolderLevel5/cm:FolderLevel6/cm:FolderLevel7/cm:FolderLevel8/cm:FolderLevel9/cm:FolderLevel10/cm:FolderLevel11/cm:FolderLevel12/cm:FolderLevel13/cm:FolderLevel14/cm:FolderLevel15/cm:FolderLevel16/cm:FolderLevel17/cm:FolderLevel18/cm:FolderLevel19",
+			"nodeCount": "10"
+		}],
+		"depth": [{
+			"nodeRef": "workspace://SpacesStore/6e8f1977-26fb-4d13-9558-d81f407b643c",
+			"path": "/app:company_home/st:sites/cm:site-2/cm:documentLibrary/cm:FolderLevel1/cm:FolderLevel2/cm:FolderLevel3/cm:FolderLevel4/cm:FolderLevel5/cm:FolderLevel6/cm:FolderLevel7/cm:FolderLevel8/cm:FolderLevel9/cm:FolderLevel10/cm:FolderLevel11/cm:FolderLevel12/cm:FolderLevel13/cm:FolderLevel14/cm:FolderLevel15/cm:FolderLevel16/cm:FolderLevel17/cm:FolderLevel18/cm:FolderLevel19",
+			"nodeCount": "10"
+		}, {
+			"nodeRef": "workspace://SpacesStore/6e8f1977-26fb-4d13-9558-d81f407b643c",
+			"path": "/app:company_home/st:sites/cm:site-2/cm:documentLibrary/cm:FolderLevel1/cm:FolderLevel2/cm:FolderLevel3/cm:FolderLevel4/cm:FolderLevel5/cm:FolderLevel6/cm:FolderLevel7/cm:FolderLevel8/cm:FolderLevel9/cm:FolderLevel10/cm:FolderLevel11/cm:FolderLevel12/cm:FolderLevel13/cm:FolderLevel14/cm:FolderLevel15/cm:FolderLevel16/cm:FolderLevel17/cm:FolderLevel18/cm:FolderLevel19",
+			"nodeCount": "10"
+		}, {
+			"nodeRef": "workspace://SpacesStore/6e8f1977-26fb-4d13-9558-d81f407b643c",
+			"path": "/app:company_home/st:sites/cm:site-2/cm:documentLibrary/cm:FolderLevel1/cm:FolderLevel2/cm:FolderLevel3/cm:FolderLevel4/cm:FolderLevel5/cm:FolderLevel6/cm:FolderLevel7/cm:FolderLevel8/cm:FolderLevel9/cm:FolderLevel10/cm:FolderLevel11/cm:FolderLevel12/cm:FolderLevel13/cm:FolderLevel14/cm:FolderLevel15/cm:FolderLevel16/cm:FolderLevel17/cm:FolderLevel18/cm:FolderLevel19",
+			"nodeCount": "10"
 		}]
-	},
-	"depth": [{
-		"node": "Blabla Depth"
-	}, {
-		"node": "Cau Depth"
-	}, {
-		"node": "Solr Depth"
-	}]
+	}
 }
