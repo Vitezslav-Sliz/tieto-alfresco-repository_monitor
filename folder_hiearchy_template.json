@@ -3,6 +3,6 @@
 	"server":"host",
 	"data":{
 		"count":[{node1},{node2},{node3}...],
-		"depth":[{folder1},{folder2},{folder3}...],
+		"depth":[{folder1},{folder2},{folder3}...]
 	}
 }
