@@ -20,7 +20,14 @@
  * Linked to Alfresco
  * Copyright (C) 2005-2017 Alfresco Software Limited.
  */
-function dummyMethod()
-{
-   
+
+function getAllVersions () {
+	logger.error("Find all JSONs ");
+}
+
+function getFolderHierarchyReport() {
+	var node = search.findNode('workspace://SpacesStore/834f738c-7822-4af0-a939-497a2b10ffb9');
+	logger.debug("Node = " + node.content);
+	
+	model.node = jsonUtils.toObject(node.content);
 }
