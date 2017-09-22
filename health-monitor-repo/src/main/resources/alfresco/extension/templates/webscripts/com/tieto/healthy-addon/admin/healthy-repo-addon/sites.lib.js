@@ -20,27 +20,7 @@
  * Linked to Alfresco
  * Copyright (C) 2005-2017 Alfresco Software Limited.
  */
-
-function getAllVersions(path) {
-	var tietoFolder = companyhome.childByNamePath(path).getChildren();
-	var versionsList = "[";
-	for (var i = 0; i < tietoFolder.length; i++) {
-		versionsList +=("{\"nodeRef\":\"" + tietoFolder[i].getNodeRef() + "\" , \"path\":\"" + tietoFolder[i].displayPath + "/" + tietoFolder[i].name + "\", \"count\": \"1521\", \"data\": " + tietoFolder[i].content + " }");
-		if (i < tietoFolder.length - 1) {
-			versionsList += ",";
-		}
-		//logger.debug(versionsList[i]);
-	}
-	versionsList += "]";
-
-	return versionsList;
+function dummyMethod()
+{
+   
 }
-
-/*
-function getFolderHierarchyReport() {
-	var array = model.allVersions;
-	logger.debug("Node = " + node.content);
-	
-	model.node = jsonUtils.toObject(node.content);
-}
-*/
