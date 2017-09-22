@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model name="tietoMonitor:tietoMonitorContentModel" xmlns="http://www.alfresco.org/model/dictionary/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<description>Content Model for monitor tool</description>
+	<author>Tieto</author>
+	<published>2018-09-22</published>
+	<version>1.0</version>
+    <imports>
+        <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+        <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
+    </imports>
+    <namespaces>
+        <namespace uri="http://www.tieto.com/model/MonitorContent/1.0" prefix="tietoMonitor"/>
+    </namespaces>
+    <data-types/>
+    <constraints>
+		<constraint name="tietoMonitor:valuesStatus" type="LIST">
+			<parameter name="allowedValues">
+				<list>
+					<value>PENDING</value>
+                    <value>PROCESSING</value>
+                    <value>FINISHED</value>
+                    <value>ERROR</value>
+				</list>
+			</parameter>
+		</constraint>
+		<constraint name="tietoMonitor:valuesOperation" type="LIST">
+			<parameter name="allowedValues">
+				<list>
+					<value>NODES_HIERARCHY</value>
+					<value>PERMISSION_GROUPS_HIERARCHY</value>
+				</list>
+			</parameter>
+		</constraint>
+	</constraints>
+    <types>
+        <type name="tietoMonitor:monitor">
+            <parent>cm:content</parent>
+            <archive>false</archive>
+            <properties>
+            	 <property name="tietoMonitor:operation">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <default>NONE</default>
+                    <index enabled="true"/>
+                    <constraints>
+						<constraint ref="tietoMonitor:valuesOperation" />
+					</constraints>
+                </property>
+                <property name="tietoMonitor:status">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <default>PENDING</default>
+                    <index enabled="true"/>
+                    <constraints>
+						<constraint ref="tietoMonitor:valuesStatus" />
+					</constraints>
+                </property>
+                <property name="tietoMonitor:message">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <index enabled="true"/>
+                </property>
+            </properties>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects>
+                <aspect>cm:auditable</aspect>
+            </mandatory-aspects>
+        </type>
+        
+        <type name="tietoMonitor:nodesHierarchy">
+            <parent>tietoMonitor:monitor</parent>
+            <archive>false</archive>
+            <properties/>
+            <associations>
+                <association name="tietoMonitor:sourceNodeRefPath">
+                    <source>
+                        <mandatory>true</mandatory>
+                        <many>true</many>
+                    </source>
+                    <target>
+                        <class>cm:cmobject</class>
+                        <mandatory enforced="false">false</mandatory>
+                        <many>false</many>
+                    </target>
+                </association>
+            </associations>
+            <overrides/>
+            <mandatory-aspects>
+                <aspect>cm:auditable</aspect>
+            </mandatory-aspects>
+        </type>
+        
+        <type name="tietoMonitor:aclHierarchy">
+            <parent>tietoMonitor:monitor</parent>
+            <archive>false</archive>
+            <properties>
+            	<property name="tietoMonitor:aclDepth">
+                    <type>d:long</type>
+                    <mandatory>true</mandatory>
+                    <default>999</default>
+                    <index enabled="true"/>
+                </property>
+            </properties>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects>
+                <aspect>cm:auditable</aspect>
+            </mandatory-aspects>
+        </type>
+    </types>
+</model>

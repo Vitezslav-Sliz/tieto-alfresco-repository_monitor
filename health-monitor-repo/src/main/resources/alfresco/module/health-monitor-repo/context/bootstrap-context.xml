@@ -7,5 +7,11 @@
     <!-- The bootstrap-context.xml file is used for patch definitions, importers, 
 		 workflow, and loading custom content models.  -->
 
-   
+   <bean id="health-monitor-repo_dictionaryBootstrap" parent="dictionaryModelBootstrap" depends-on="dictionaryBootstrap">
+        <property name="models">
+            <list>
+                <value>alfresco/module/${project.artifactId}/model/tieto-monitor-model.xml</value>
+            </list>
+        </property>
+    </bean>
 </beans>

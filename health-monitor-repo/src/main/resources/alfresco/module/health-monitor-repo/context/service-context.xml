@@ -19,5 +19,55 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-    
+	
+	<bean id="health-monitor-repo_MonitorStorage" class="com.tieto.ecm.alfresco.monitor.storage.MonitorStorage">
+		<property name="repositoryHelper" ref="repositoryHelper"/>
+    	<property name="nodeService" ref="NodeService"/>
+		<property name="contentService" ref="ContentService"/>
+		<property name="namespaceService" ref="NamespaceService"/>
+		<property name="dictionaryService" ref="dictionaryService"/>
+		<property name="permissionService" ref="permissionService"/>
+		<property name="containerName" value="${tieto-monitor.container_name}"/>
+	</bean>
+	
+	<bean id="health-monitor-repo_MonitorService" class="com.tieto.ecm.alfresco.monitor.service.MonitorServiceImpl" parent="baseJavaScriptExtension">
+		<property name="extensionName" value ="monitorService" />
+		<property name="serviceHelpers">
+			<map>
+				<entry key="NODES_HIERARCHY" value-ref="health-monitor-repo_nodesHieararchyServiceHelper" />
+				<entry key="PERMISSION_GROUPS_HIERARCHY" value-ref="health-monitor-repo_aclHieararchyServiceHelper" />
+				<entry key="SITES_COUNT" value-ref="health-monitor-repo_siteCountServiceHelper" />
+			</map>
+		</property>
+    	<property name="monitorStorage" ref="health-monitor-repo_MonitorStorage"/>
+		<property name="transactionHelper" ref="retryingTransactionHelper"/>
+	</bean>
+	
+	<bean id="health-monitor-repo_MonitorJobAclHierarchy" class="com.tieto.ecm.alfresco.monitor.service.job.AclHierarchyJobImpl" parent="baseJavaScriptExtension">
+		<property name="extensionName" value ="monitorJobAclHierarchy" />
+    	<property name="monitorStorage" ref="health-monitor-repo_MonitorStorage"/>
+		<property name="transactionHelper" ref="retryingTransactionHelper"/>
+	</bean>
+	
+	<bean id="health-monitor-repo_MonitorJobNodesHierarchy" class="com.tieto.ecm.alfresco.monitor.service.job.NodesHierarchyJobImpl" parent="baseJavaScriptExtension">
+		<property name="extensionName" value ="monitorJobNodesHierarchy" />
+    	<property name="monitorStorage" ref="health-monitor-repo_MonitorStorage"/>
+		<property name="transactionHelper" ref="retryingTransactionHelper"/>
+	</bean>
+	
+	<bean id="health-monitor-repo_nodesHieararchyServiceHelper" class="com.tieto.ecm.alfresco.monitor.action.LocalActionServiceHelper">
+      <property name="localActionService" ref="actionService" />
+      <property name="actionName" value="monitor_job_nodesHierarchy" />
+	</bean>
+	
+	<bean id="health-monitor-repo_aclHieararchyServiceHelper" class="com.tieto.ecm.alfresco.monitor.action.LocalActionServiceHelper">
+      <property name="localActionService" ref="actionService" />
+      <property name="actionName" value="monitor_job_aclHierarchy" />
+	</bean>
+	
+	<bean  id="health-monitor-repo_siteCountServiceHelper" class="com.tieto.ecm.alfresco.monitor.action.LocalActionServiceHelper">
+      <property name="localActionService" ref="actionService" />
+      <property name="actionName" value="monitor_job_sitesCount" />
+	</bean>
+	
 </beans>
