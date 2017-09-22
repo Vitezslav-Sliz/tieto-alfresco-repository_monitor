@@ -70,4 +70,9 @@
       <property name="actionName" value="monitor_job_sitesCount" />
 	</bean>
 	
+	<bean id="monitorGroupsService"
+		class="com.tieto.ecm.alfresco.monitor.groups.service.MonitorGroupsService">
+		<property name="authorityService" ref="AuthorityService" />
+	</bean>
+	
 </beans>
