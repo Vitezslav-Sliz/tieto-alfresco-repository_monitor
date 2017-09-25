@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<webscript>
+    <shortname>List nodes for job</shortname>
+    <description>Lists all nodes for given job</description>
+    <url>/tieto/healthy-addon/folder-hierarchy/list-nodes-for-job?nodeRef={nodeRef}</url>
+    <family>AdminConsole</family>
+    <family>Tieto Healthy Addon</family>
+    <format default="json"/>
+    <authentication>admin</authentication>
+    <lifecycle>internal</lifecycle>
+    <transaction allow="readonly">required</transaction>
+    <args>
+    <arg>
+      <name>nodeRef</name>
+      <description>NodeRef for JSON file</description>
+    </arg>
+ 	</args>
+</webscript>
