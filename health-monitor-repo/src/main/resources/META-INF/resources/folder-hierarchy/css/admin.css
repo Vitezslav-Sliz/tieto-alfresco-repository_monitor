@@ -72,3 +72,24 @@ input[type="text"]
 	padding-left: 5px;
 	padding-right: 5px;
 }
+.node-info{
+	word-break: break-all;
+	text-align: left;
+}
+
+.node-header{
+	width: 10%;
+	vertical-align: top;
+}
+.info-container{
+	display: inline-flex; 
+	flex-wrap: nowrap;
+	width: 100%;
+}
+.info-container-block{
+	width: 50%;
+}
+#job-select-label{
+	font-weight: bold;
+	font-size: 13pt;
+}

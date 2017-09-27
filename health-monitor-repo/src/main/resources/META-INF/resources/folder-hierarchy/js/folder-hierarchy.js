@@ -13,6 +13,7 @@ function render() {
 		$("#server").text(data.server);
 		renderCount(data.data.count);
 		renderDepth(data.data.depth);
+		$(".path").shorten();
 	}).fail(function(jqXHR, textStatus) {
 		console.log("Error while loading list of nodes for job");
 	});
@@ -40,24 +41,24 @@ $(function() {
 });
 
 function renderCount(data) {
-	var htmlCount = "";
+	var htmlCount = "<div class=\"node-info\"><table>";
 	for (var i=0; i < data.length; i++) {
-		htmlCount += "NodeRef: " + data[i].nodeRef + "<br\>";
-		htmlCount += "Path: " + data[i].path + "<br\>";
-		htmlCount += "Node count: " + data[i].nodeCount + "<br\>";
+		htmlCount += "<tr><td class=\"node-header\">NodeRef:</td><td>" + data[i].nodeRef + "</td></tr>";
+		htmlCount += "<tr><td class=\"node-header\">Path:</td><td><span class=\"path\">" + data[i].path + "</td></tr>";
+		htmlCount += "<tr><td class=\"node-header\">Node count:</td><td>" + data[i].nodeCount + "</td></tr>";
 	}
-	htmlCount += "<br\>"; 
+	htmlCount += "</table></div>"; 
 	$("#count").html(htmlCount);
 }
 
 function renderDepth(data) {
-	var htmlDepth = "";
+	var htmlDepth = "<div class=\"node-info\"><table>";
 	for (var i=0; i < data.length; i++) {
-		htmlDepth += "NodeRef: " + data[i].nodeRef + "<br\>";
-		htmlDepth += "Path: " + data[i].path + "<br\>";
-		htmlDepth += "Node count: " + data[i].nodeCount + "<br\>";
+		htmlDepth += "<tr><td class=\"node-header\">NodeRef:</td><td>" + data[i].nodeRef + "</td></tr>";
+		htmlDepth += "<tr><td class=\"node-header\">Path:</td><td><span class=\"path\">" + data[i].path + "</td></tr>";
+		htmlDepth += "<tr><td class=\"node-header\">Node count:</td><td>" + data[i].nodeCount + "</td></tr>";
 	}
-	htmlDepth += "<br\>"; 
+	htmlDepth += "</table></div>"; 
 	$("#depth").html(htmlDepth);
 }
 

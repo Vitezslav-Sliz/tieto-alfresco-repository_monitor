@@ -1,9 +1,19 @@
 <#include "../admin-template.ftl" />
 
-<@page title=msg("admin-console.tool.folder-hierarchy.section") customJSFiles=["js/jquery-3.2.1.min.js", "js/folder-hierarchy.js"] customCSSFiles=["css/admin.css"] readonly=true>
+<@page title=msg("admin-console.tool.folder-hierarchy.section") customJSFiles=["folder-hierarchy/js/jquery-3.2.1.min.js", "folder-hierarchy/js/folder-hierarchy.js","folder-hierarchy/js/jquery.shorten.min.js"] customCSSFiles=["folder-hierarchy/css/admin.css"] readonly=true>
 
-	Time: <span id="time"></span></br>
-	Server: <span id="server"></span></br>
+	
+	
+	<section class="info-container">
+	    <div class="info-container-block">
+	    	Time: <span id="time"></span></br>
+			Server: <span id="server"></span></br>
+	    </div>
+	    <div class="info-container-block">
+	    	<span id="job-select-label">Select job:</span></br>
+			<select id="versionSelect"></select>
+	    </div>
+	</section>
 	
 	<div class="column-full">
 	
@@ -19,10 +29,10 @@
 	
 	</div>
 	
-	<h2>Select job:</h2>
-	<select id="versionSelect"></select>
+	
 
 	<script>
+	
 	        var serviceContext = '${url.serviceContext}';
 	
 
