@@ -1,9 +1,0 @@
-<webscript>
-  <shortname>monitor-invalid-groups</shortname>
-  <description>We are monitoring hierarchy of all alfresco groups. The limit is less than 5 parents of one group. </description>
-  <family>health-monitor</family>
-  <url>/monitor/invalid-groups</url>
-  <format default="json">argument</format>
-  <authentication>user</authentication>
-  <lifecycle>internal</lifecycle>
-</webscript>

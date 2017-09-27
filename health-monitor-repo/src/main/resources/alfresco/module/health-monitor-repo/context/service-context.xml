@@ -75,9 +75,9 @@
 		<property name="transactionHelper" ref="retryingTransactionHelper"/>
 	</bean>
 	
-	<bean id="monitorGroupsService"
-		class="com.tieto.ecm.alfresco.monitor.groups.service.MonitorGroupsService">
+	<bean id="monitor_job_aclHierarchy" class="com.tieto.ecm.alfresco.monitor.service.processor.MonitorAclHierarchyAction">
 		<property name="authorityService" ref="AuthorityService" />
+		<property name="monitorStorage" ref="health-monitor-repo_MonitorStorage" />
 	</bean>
 	
 </beans>

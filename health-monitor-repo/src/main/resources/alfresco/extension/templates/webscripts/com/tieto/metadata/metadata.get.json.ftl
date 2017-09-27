@@ -1,3 +1,0 @@
-<#if model??>
-${model}
-</#if>
