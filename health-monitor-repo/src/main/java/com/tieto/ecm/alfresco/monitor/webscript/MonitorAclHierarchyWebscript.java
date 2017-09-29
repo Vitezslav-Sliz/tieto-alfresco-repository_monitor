@@ -3,7 +3,6 @@ package com.tieto.ecm.alfresco.monitor.webscript;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.alfresco.repo.model.Repository;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.apache.log4j.Logger;
 import org.springframework.extensions.webscripts.Cache;
@@ -20,8 +19,7 @@ import com.tieto.ecm.alfresco.monitor.service.job.AclHierarchyJob;
  *
  */
 public class MonitorAclHierarchyWebscript extends DeclarativeWebScript {
-	// Should be in global props or in request?
-	private static final int DEEP = 5;
+	private String depth;
 	private AclHierarchyJob job;
 	private MonitorJobService monitorService;
 
@@ -30,12 +28,14 @@ public class MonitorAclHierarchyWebscript extends DeclarativeWebScript {
 	@Override
 	protected Map<String, Object> executeImpl(WebScriptRequest req, Status status, Cache cache) {
 		LOGGER.debug("Initiate run calculation");
-		final NodeRef jobNode = job.createAclHierarchyJob(DEEP);
-		
+
+		String requestDepth = req.getParameter("depth");
+		final NodeRef jobNode = job.createAclHierarchyJob(Long.parseLong((requestDepth != null) ? requestDepth : depth));
+
 		monitorService.runMonitorOperation(jobNode);
 		final Map<String, Object> model = new HashMap<>();
 		model.put("jobNode", jobNode.toString());
-		
+
 		return model;
 	}
 
@@ -45,5 +45,9 @@ public class MonitorAclHierarchyWebscript extends DeclarativeWebScript {
 
 	public void setMonitorService(MonitorJobService monitorService) {
 		this.monitorService = monitorService;
+	}
+
+	public void setDepth(String depth) {
+		this.depth = depth;
 	}
 }

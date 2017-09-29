@@ -1,3 +1,6 @@
 <#if jobNode??>
-${jobNode}
+{       
+	"monitorJob": "${jobNode}"
+}
 </#if>
+
