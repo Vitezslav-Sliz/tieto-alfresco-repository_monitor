@@ -28,15 +28,30 @@ public class MonitorAclHierarchyWebscript extends DeclarativeWebScript {
 	@Override
 	protected Map<String, Object> executeImpl(WebScriptRequest req, Status status, Cache cache) {
 		LOGGER.debug("Initiate run calculation");
-
-		String requestDepth = req.getParameter("depth");
-		final NodeRef jobNode = job.createAclHierarchyJob(Long.parseLong((requestDepth != null) ? requestDepth : depth));
+		
+		long requestDepth = acquireLongParameter(req, "depth");
+		final NodeRef jobNode = job.createAclHierarchyJob(requestDepth);
 
 		monitorService.runMonitorOperation(jobNode);
 		final Map<String, Object> model = new HashMap<>();
 		model.put("jobNode", jobNode.toString());
-
+		model.put("depth", String.valueOf(requestDepth));
+		
 		return model;
+	}
+	
+	private long acquireLongParameter(WebScriptRequest req, String parameterName) {
+		String parameter = req.getParameter(parameterName);
+		Long result;
+		
+		try {
+			result = Long.parseLong(parameter);
+		} catch (Exception e) {
+			LOGGER.debug("Failed to acquire parameter: " + parameterName);
+			result = Long.parseLong(depth);
+		}
+		
+		return result;
 	}
 
 	public void setJob(AclHierarchyJob job) {

@@ -1,6 +1,5 @@
-<#if jobNode??>
 {       
-	"monitorJob": "${jobNode}"
+        "monitorJob": "${jobNode!"[]"}",              
+        "depth": "${depth!-1}"
 }
-</#if>
 
