@@ -29,5 +29,8 @@
     <bean id="webscript.com.tieto.ecm.alfresco.monitor.job.job_aclHieararchy.get" class="com.tieto.ecm.alfresco.monitor.webscript.MonitorAclHierarchyWebscript" parent="webscript">
 	      <property name="job" ref="health-monitor-repo_MonitorJobAclHierarchy"/>
 	      <property name="monitorService" ref="health-monitor-repo_MonitorService"/>
+	      <property name="depth">
+		      <value>${aclhierarchy.job.depth}</value>
+		  </property>
     </bean>
 </beans>
