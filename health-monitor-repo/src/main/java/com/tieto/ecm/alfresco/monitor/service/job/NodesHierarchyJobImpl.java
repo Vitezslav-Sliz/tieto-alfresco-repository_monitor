@@ -29,7 +29,7 @@ public class NodesHierarchyJobImpl extends BaseProcessorExtension implements Nod
 	 * @see com.tieto.ecm.alfresco.monitor.service.job.NodesHierarchyJob#createNodesHuerarchyJob(org.alfresco.service.cmr.repository.NodeRef)
 	 */
 	@Override
-	public NodeRef createNodesHierarchyJob(final NodeRef sourcePathNodeRef) {
+	public NodeRef createNodesHierarchyJob(final NodeRef sourcePathNodeRef, int numberOfNodes, int hierarchyDepth) {
 			ParameterCheck.mandatory("sourcePathNodeRef", sourcePathNodeRef);
 			return transactionHelper.doInTransaction(new RetryingTransactionCallback<NodeRef>() {
 	            @Override
@@ -41,6 +41,9 @@ public class NodesHierarchyJobImpl extends BaseProcessorExtension implements Nod
 	                if (sourcePathNodeRef != null){
 	                	monitorStorage.addSourcePathNode(monitorNode, sourcePathNodeRef);
 	                }
+	                monitorStorage.addHierarchyDepth(monitorNode, hierarchyDepth);
+	                monitorStorage.addNumberOfChildren(monitorNode, numberOfNodes);
+	                
 	                return monitorNode;
 	            }
 	        }, false, true);

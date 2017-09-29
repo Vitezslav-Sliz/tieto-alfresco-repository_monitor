@@ -4,6 +4,6 @@ import org.alfresco.service.cmr.repository.NodeRef;
 
 public interface NodesHierarchyJob {
 
-	public NodeRef createNodesHierarchyJob(NodeRef sourcePathNodeRef);
+	public NodeRef createNodesHierarchyJob(NodeRef sourcePathNodeRef, int numberOfNodes, int hierarchyDepth);
 
 }

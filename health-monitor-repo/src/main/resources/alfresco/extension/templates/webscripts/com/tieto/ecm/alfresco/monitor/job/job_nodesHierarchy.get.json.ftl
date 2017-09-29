@@ -1,5 +1,5 @@
-<#escape x as jsonUtils.encodeJSONString(x)>
 {       
-	"monitorJob": "${jobNode?string}",
+  "monitorJob": <#if jobNode??>"${jobNode}"<#else>""</#if>,
+  "numberOfNodes": <#if numberOfNodes??>"${numberOfNodes}"<#else>""</#if>,
+  "hierarchyDepth": <#if hierarchyDepth??>"${hierarchyDepth}"<#else>""</#if>
 }
-</#escape>

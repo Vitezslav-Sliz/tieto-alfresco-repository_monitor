@@ -131,6 +131,18 @@ public class MonitorStorage {
 		LOGGER.debug("Depth count added to Monitor-NodeRef '{}'. PathNode={}",monitorNodeRef, depth);
 	}
 	
+	public void addHierarchyDepth(final NodeRef monitorNodeRef, long hierarchyDepth) {
+		validateMonitorNode(monitorNodeRef, MonitorModel.TYPE_MONITOR_NODES_HIERARCHY);
+		nodeService.setProperty(monitorNodeRef, MonitorModel.PROP_HIERARCHY_DEPTH, hierarchyDepth);
+		LOGGER.debug("Hierarchy depth count added to Monitor-NodeRef '{}'. PathNode={}", monitorNodeRef, hierarchyDepth);
+	}
+	
+	public void addNumberOfChildren(final NodeRef monitorNodeRef, long numberOfChildren) {
+		validateMonitorNode(monitorNodeRef, MonitorModel.TYPE_MONITOR_NODES_HIERARCHY);
+		nodeService.setProperty(monitorNodeRef, MonitorModel.PROP_NUMBER_OF_CHILDREN, numberOfChildren);
+		LOGGER.debug("Children count added to Monitor-NodeRef '{}'. PathNode={}", monitorNodeRef, numberOfChildren);
+	}
+	
 	public void setMonitorData(final NodeRef monitorNodeRef,final InputStream monitorData) {
 		final ContentWriter writer = contentService.getWriter(monitorNodeRef, ContentModel.PROP_CONTENT, true);
 		writer.putContent(monitorData);
