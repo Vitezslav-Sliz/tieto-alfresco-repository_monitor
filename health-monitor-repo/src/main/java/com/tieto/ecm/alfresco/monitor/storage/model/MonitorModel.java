@@ -21,7 +21,7 @@ public interface MonitorModel {
 	public static final QName TYPE_MONITOR = QName.createQName(TIETO_MONITOR_MODEL_1_0_URI, "monitor");
 	
 	public static final QName TYPE_MONITOR_NODES_HIERARCHY = QName.createQName(TIETO_MONITOR_MODEL_1_0_URI, "nodesHierarchy");
-	
+
 	public static final QName TYPE_MONITOR_ACL_HIERARCHY = QName.createQName(TIETO_MONITOR_MODEL_1_0_URI, "aclHierarchy");
 
 	public static final QName PROP_OPERATION = QName.createQName(TIETO_MONITOR_MODEL_1_0_URI, "operation");
@@ -33,4 +33,8 @@ public interface MonitorModel {
 	public static final QName ASSOC_SOURCE_NODE_PATH = QName.createQName(TIETO_MONITOR_MODEL_1_0_URI, "sourceNodeRefPath");
 
 	public static final QName PROP_ACL_DEPTH = QName.createQName(TIETO_MONITOR_MODEL_1_0_URI, "aclDepth");
+	
+	public static final QName PROP_HIERARCHY_DEPTH = QName.createQName(TIETO_MONITOR_MODEL_1_0_URI, "hierarchyDepth");
+	
+	public static final QName PROP_NUMBER_OF_CHILDREN = QName.createQName(TIETO_MONITOR_MODEL_1_0_URI, "numberOfChildren");
 }

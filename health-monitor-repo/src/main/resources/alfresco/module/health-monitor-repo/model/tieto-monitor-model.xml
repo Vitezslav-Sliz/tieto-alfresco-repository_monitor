@@ -72,7 +72,20 @@
         <type name="tietoMonitor:nodesHierarchy">
             <parent>tietoMonitor:monitor</parent>
             <archive>false</archive>
-            <properties/>
+            <properties>
+            	<property name="tietoMonitor:hierarchyDepth">
+                    <type>d:long</type>
+                    <mandatory>true</mandatory>
+                    <default>999</default>
+                    <index enabled="true"/>
+                </property>
+                <property name="tietoMonitor:numberOfChildren">
+                    <type>d:long</type>
+                    <mandatory>true</mandatory>
+                    <default>999</default>
+                    <index enabled="true"/>
+                </property>
+            </properties>
             <associations>
                 <association name="tietoMonitor:sourceNodeRefPath">
                     <source>
