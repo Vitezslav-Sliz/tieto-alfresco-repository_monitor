@@ -1,5 +1,6 @@
 package com.tieto.ecm.alfresco.monitor.service.processor;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.alfresco.repo.action.executer.ActionExecuterAbstractBase;
@@ -8,6 +9,7 @@ import org.alfresco.repo.transaction.RetryingTransactionHelper.RetryingTransacti
 import org.alfresco.service.cmr.action.Action;
 import org.alfresco.service.cmr.action.ParameterDefinition;
 import org.alfresco.service.cmr.repository.NodeRef;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.tieto.ecm.alfresco.monitor.storage.MonitorStorage;
@@ -38,6 +40,7 @@ public abstract class AbstractMonitorExecuterAction extends ActionExecuterAbstra
 	protected final void executeImpl(Action action, NodeRef actionedUponNodeRef) {
 		logger.debug("Initiate action:'{}' for NodeRef:{}", action.getActionDefinitionName(),actionedUponNodeRef.toString());
 		executeImpl(actionedUponNodeRef);
+		logger.debug("Action:'{}' for NodeRef:{} ended", action.getActionDefinitionName(),actionedUponNodeRef.toString());
 	}
 
 	@Override
@@ -45,13 +48,23 @@ public abstract class AbstractMonitorExecuterAction extends ActionExecuterAbstra
 		// Not used method
 	}
 
-	protected void updateStatus(final NodeRef actionedUponNodeRef, JobStatus status, String message) {
+	protected void updateStatus(final NodeRef actionedUponNodeRef, JobStatus.Status status, String message) {
 		logger.info("Update monitor status ref:{} with status:{}", actionedUponNodeRef,status);
 		transactionHelper.doInTransaction(new RetryingTransactionCallback<Void>() {
 			@Override
 			public Void execute() throws Throwable {
-				final JobStatus newStatus = new JobStatus(status.getStatus(), message);
+				final JobStatus newStatus = new JobStatus(status, message);
 				monitorStorage.updateStatus(actionedUponNodeRef, newStatus);
+				return null;
+			}
+		}, false, true);
+	}
+	
+	protected void setOutput(final NodeRef actionedUponNodeRef, String output) {
+		transactionHelper.doInTransaction(new RetryingTransactionCallback<Void>() {
+			@Override
+			public Void execute() throws Throwable {
+				monitorStorage.setMonitorData(actionedUponNodeRef, IOUtils.toInputStream(output, StandardCharsets.UTF_8));
 				return null;
 			}
 		}, false, true);

@@ -29,6 +29,7 @@
 					<value>NONE</value>
 					<value>NODES_HIERARCHY</value>
 					<value>PERMISSION_GROUPS_HIERARCHY</value>
+					<value>SITES_COUNT</value>
 				</list>
 			</parameter>
 		</constraint>
@@ -116,6 +117,17 @@
                     <index enabled="true"/>
                 </property>
             </properties>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects>
+                <aspect>cm:auditable</aspect>
+            </mandatory-aspects>
+        </type>
+        
+        <type name="tietoMonitor:sitesCount">
+            <parent>tietoMonitor:monitor</parent>
+            <archive>false</archive>
+            <properties/>
             <associations/>
             <overrides/>
             <mandatory-aspects>

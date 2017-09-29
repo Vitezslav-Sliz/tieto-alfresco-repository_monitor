@@ -20,10 +20,17 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
           
-	<bean id="monitor_job_nodesHierarchy" class="com.tieto.ecm.alfresco.monitor.service.processor.MonitorNodesHierarchyAction"
-		parent="health-monitor-repo_abstractExecuterAction">
+	<bean id="monitor_job_nodesHierarchy" class="com.tieto.ecm.alfresco.monitor.service.processor.MonitorNodesHierarchyAction" parent="health-monitor-repo_abstractExecuterAction">
     	<property name="nodeService" ref="nodeService"/>
     	<property name="repositoryHelper" ref="repositoryHelper"/>
 	</bean>
 
+	<bean id="monitor_job_aclHierarchy" class="com.tieto.ecm.alfresco.monitor.service.processor.MonitorAclHierarchyAction" parent="health-monitor-repo_abstractExecuterAction">
+		<property name="authorityService" ref="AuthorityService" />
+	</bean>
+	
+	<bean id="monitor_job_sitesCount" class="com.tieto.ecm.alfresco.monitor.service.processor.MonitorSitesCountAction" parent="health-monitor-repo_abstractExecuterAction">
+		<property name="searchService" ref="searchService" />
+	</bean>
+	
 </beans>

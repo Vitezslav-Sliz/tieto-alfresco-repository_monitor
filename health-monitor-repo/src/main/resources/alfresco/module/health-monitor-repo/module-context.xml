@@ -28,6 +28,6 @@
 	<import resource="classpath:alfresco/module/${project.artifactId}/context/job-context.xml" />
 	<import resource="classpath:alfresco/module/${project.artifactId}/context/webscript-context.xml" />
     <import resource="classpath:alfresco/module/${project.artifactId}/context/service-context.xml" />
-	<import resource="classpath:alfresco/module/${project.artifactId}/context/sitescount-context.xml" />
+	<import resource="classpath:alfresco/module/${project.artifactId}/context/trigger-context.xml" />
 
 </beans>

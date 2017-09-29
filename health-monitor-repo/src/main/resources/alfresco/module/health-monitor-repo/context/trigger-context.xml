@@ -20,22 +20,18 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
           
-	<!-- Job executer bean -->
-	<bean id="com.tieto.ecm.alfresco.sitescount.SitesCountJobExecuter" class="com.tieto.ecm.alfresco.sitescount.SitesCountJobExecuter">
-		<property name="serviceRegistry">
-			<ref bean="ServiceRegistry" />
-		</property>
-	</bean>
-
-	<!-- Job detail bean -->
+	<!-- Job detail Counts sites bean -->
 	<bean id="com.tieto.ecm.alfresco.sitescount.SitesCountJob.JobDetail" class="org.springframework.scheduling.quartz.JobDetailBean">
 		<property name="jobClass">
-			<value>com.tieto.ecm.alfresco.sitescount.SitesCountJob</value>
+			<value>com.tieto.ecm.alfresco.monitor.trigger.SitesCountTriggerJob</value>
 		</property>
 		<property name="jobDataAsMap">
 			<map>
 				<entry key="jobExecuter">
-					<ref bean="com.tieto.ecm.alfresco.sitescount.SitesCountJobExecuter" />
+					<ref bean="health-monitor-repo_MonitorService" />
+				</entry>
+				<entry key="jobCreateExecuter">
+					<ref bean="health-monitor-repo_MonitorJobSitesCount" />
 				</entry>
 				<entry key="jobLockService">
 					<ref bean="jobLockService" />

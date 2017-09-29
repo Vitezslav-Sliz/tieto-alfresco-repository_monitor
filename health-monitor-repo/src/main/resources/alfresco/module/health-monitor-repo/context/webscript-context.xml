@@ -33,4 +33,9 @@
 		      <value>${aclhierarchy.job.depth}</value>
 		  </property>
     </bean>
+    
+    <bean id="webscript.com.tieto.ecm.alfresco.monitor.job.job_sitesCount.get" class="com.tieto.ecm.alfresco.monitor.webscript.SitesCountInitiatorWebscript" parent="webscript">
+	      <property name="job" ref="health-monitor-repo_MonitorJobSitesCount"/>
+	      <property name="monitorService" ref="health-monitor-repo_MonitorService"/>
+    </bean>
 </beans>

@@ -55,6 +55,12 @@
 		<property name="transactionHelper" ref="retryingTransactionHelper"/>
 	</bean>
 	
+	<bean id="health-monitor-repo_MonitorJobSitesCount" class="com.tieto.ecm.alfresco.monitor.service.job.SitesCountJobImpl" parent="baseJavaScriptExtension">
+		<property name="extensionName" value ="monitorJobSitesCount" />
+    	<property name="monitorStorage" ref="health-monitor-repo_MonitorStorage"/>
+		<property name="transactionHelper" ref="retryingTransactionHelper"/>
+	</bean>
+	
 	<bean id="health-monitor-repo_nodesHieararchyServiceHelper" class="com.tieto.ecm.alfresco.monitor.action.LocalActionServiceHelper">
       <property name="localActionService" ref="actionService" />
       <property name="actionName" value="monitor_job_nodesHierarchy" />
@@ -70,14 +76,9 @@
       <property name="actionName" value="monitor_job_sitesCount" />
 	</bean>
 	
-	<bean id="health-monitor-repo_abstractExecuterAction" class="com.tieto.ecm.alfresco.dong.bulk.engine.AbstractBulkExecuterAction" abstract="true">
+	<bean id="health-monitor-repo_abstractExecuterAction" class="com.tieto.ecm.alfresco.monitor.service.processor.AbstractMonitorExecuterAction" abstract="true">
 		<property name="monitorStorage" ref="health-monitor-repo_MonitorStorage"/>
 		<property name="transactionHelper" ref="retryingTransactionHelper"/>
-	</bean>
-	
-	<bean id="monitor_job_aclHierarchy" class="com.tieto.ecm.alfresco.monitor.service.processor.MonitorAclHierarchyAction">
-		<property name="authorityService" ref="AuthorityService" />
-		<property name="monitorStorage" ref="health-monitor-repo_MonitorStorage" />
 	</bean>
 	
 </beans>

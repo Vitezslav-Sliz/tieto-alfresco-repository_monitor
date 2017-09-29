@@ -1,0 +1,8 @@
+<webscript>
+  <shortname>Initiate processing of site count analysis</shortname>
+  <description>Initiate processing of site count analysis</description>
+  <family>Tieto monitor tool</family>
+  <url>/api/monitor/job/sites_count</url>
+  <format default="json">argument</format>
+  <authentication>admin</authentication>
+</webscript>
