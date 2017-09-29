@@ -155,9 +155,6 @@ public class MonitorNodesHierarchyAction extends AbstractMonitorExecuterAction {
 	private void acquireNodesProperties(NodeRef actionedUponNodeRef) {
 		this.numberOfNodesParam = (long) nodeService.getProperty(actionedUponNodeRef, MonitorModel.PROP_NUMBER_OF_CHILDREN);
 		this.hierarchyDepthParam = (long) nodeService.getProperty(actionedUponNodeRef, MonitorModel.PROP_HIERARCHY_DEPTH);
-		
-		System.out.println("param " + numberOfNodesParam);
-		System.out.println("param " + hierarchyDepthParam);
 	}
 
 	private void clearFields() {

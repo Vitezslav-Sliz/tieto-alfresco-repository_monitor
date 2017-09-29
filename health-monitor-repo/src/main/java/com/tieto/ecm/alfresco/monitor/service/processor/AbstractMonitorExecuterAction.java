@@ -26,9 +26,12 @@ public abstract class AbstractMonitorExecuterAction extends ActionExecuterAbstra
 
 	protected RetryingTransactionHelper transactionHelper;
 
-
 	public void setTransactionHelper(RetryingTransactionHelper transactionHelper) {
 		this.transactionHelper = transactionHelper;
+	}
+	
+	public void setMonitorStorage(MonitorStorage monitorStorage) {
+		this.monitorStorage = monitorStorage;
 	}
 
 	@Override
