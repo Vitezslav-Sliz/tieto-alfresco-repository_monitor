@@ -75,10 +75,11 @@ input[type="text"]
 .node-info{
 	word-break: break-all;
 	text-align: left;
+	margin-botttom: 10pt;
 }
 
 .node-header{
-	width: 10%;
+	width: 60pt;
 	vertical-align: top;
 }
 .info-container{
@@ -92,4 +93,7 @@ input[type="text"]
 #job-select-label{
 	font-weight: bold;
 	font-size: 13pt;
+}
+.value{
+	font-weight: normal;
 }

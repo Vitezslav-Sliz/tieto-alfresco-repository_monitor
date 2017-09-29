@@ -5,7 +5,7 @@ function render() {
 	var currentVersion = versionInJson[selected];
 	var nodeRef = $("#versionSelect option:selected").text(); 
 	$.ajax({
-		url: serviceContext + "/tieto/healthy-addon/folder-hierarchy/list-nodes-for-job.json",
+		url: serviceContext + "/tieto/healthy-addon/util/get-content",
 		method: "GET",
 		data: {"nodeRef" : nodeRef}
 	}).done(function( data ) {
@@ -41,24 +41,29 @@ $(function() {
 });
 
 function renderCount(data) {
-	var htmlCount = "<div class=\"node-info\"><table>";
+	var htmlCount = "";
 	for (var i=0; i < data.length; i++) {
-		htmlCount += "<tr><td class=\"node-header\">NodeRef:</td><td>" + data[i].nodeRef + "</td></tr>";
-		htmlCount += "<tr><td class=\"node-header\">Path:</td><td><span class=\"path\">" + data[i].path + "</td></tr>";
-		htmlCount += "<tr><td class=\"node-header\">Node count:</td><td>" + data[i].nodeCount + "</td></tr>";
+		htmlCount += "<div class=\"node-info\"><table>";
+		htmlCount += "<tr><td class=\"node-header\">NodeRef:</td><td class=\"value\">" + data[i].nodeRef + "</td></tr>";
+		htmlCount += "<tr><td class=\"node-header\">Path:</td><td><span class=\"path value\">" + data[i].path + "</td></tr>";
+		htmlCount += "<tr><td class=\"node-header\">Node count:</td><td class=\"value\">" + data[i].nodeCount + "</td></tr>";
+		htmlCount += "</table></div>"; 
+		htmlCount += "<hr/>";
 	}
-	htmlCount += "</table></div>"; 
+	
 	$("#count").html(htmlCount);
 }
 
 function renderDepth(data) {
-	var htmlDepth = "<div class=\"node-info\"><table>";
+	var htmlDepth = "";
 	for (var i=0; i < data.length; i++) {
+		htmlDepth += "<div class=\"node-info\"><table>"
 		htmlDepth += "<tr><td class=\"node-header\">NodeRef:</td><td>" + data[i].nodeRef + "</td></tr>";
 		htmlDepth += "<tr><td class=\"node-header\">Path:</td><td><span class=\"path\">" + data[i].path + "</td></tr>";
 		htmlDepth += "<tr><td class=\"node-header\">Node count:</td><td>" + data[i].nodeCount + "</td></tr>";
+		htmlDepth += "</table></div>"; 
+		htmlDepth += "<hr/>";
 	}
-	htmlDepth += "</table></div>"; 
 	$("#depth").html(htmlDepth);
 }
 
