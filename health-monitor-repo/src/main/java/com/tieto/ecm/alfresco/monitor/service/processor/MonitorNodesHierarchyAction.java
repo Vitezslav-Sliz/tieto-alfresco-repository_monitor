@@ -22,8 +22,10 @@ import com.tieto.ecm.alfresco.monitor.storage.model.JobStatus.Status;
 import com.tieto.ecm.alfresco.monitor.storage.model.MonitorModel;
 
 /**
+ * Class implements processor which searches nodes violating hierarchy depth
+ * policy or policy for maximum number of children
  * 
- * @author Privoznik Tomas
+ * @author Tomas Privoznik
  */
 public class MonitorNodesHierarchyAction extends AbstractMonitorExecuterAction {
 
@@ -91,6 +93,8 @@ public class MonitorNodesHierarchyAction extends AbstractMonitorExecuterAction {
 		// check hierarchy depth
 		if (isHierarchyInRange(nodesHierarchy, hierarchyDepthParam)) {
 			hierarchyCount++;
+			// save parent node violating hierarchy depth
+			// depth of the parent is determined from current node and hierarchyDepthParam
 			saveNodeAndPath(nodesHierarchy, hierarchyDepthParam);
 		}
 
@@ -100,7 +104,9 @@ public class MonitorNodesHierarchyAction extends AbstractMonitorExecuterAction {
 		// check number of nodes
 		if (isHierarchyInRange(childrenOfNode, numberOfNodesParam)) {
 			childrenCount++;
-			saveNodeAndPath(nodesHierarchy, 0);
+			// second parameter is 0 because we need to save current node
+			// sentinel is "not used"
+			saveNodeAndPath(nodesHierarchy, 0L);
 		}
 
 		// go through all child associations of node
@@ -153,8 +159,10 @@ public class MonitorNodesHierarchyAction extends AbstractMonitorExecuterAction {
 	}
 
 	private void acquireNodesProperties(NodeRef actionedUponNodeRef) {
-		this.numberOfNodesParam = (long) nodeService.getProperty(actionedUponNodeRef, MonitorModel.PROP_NUMBER_OF_CHILDREN);
-		this.hierarchyDepthParam = (long) nodeService.getProperty(actionedUponNodeRef, MonitorModel.PROP_HIERARCHY_DEPTH);
+		this.numberOfNodesParam = (long) nodeService.getProperty(actionedUponNodeRef,
+				MonitorModel.PROP_NUMBER_OF_CHILDREN);
+		this.hierarchyDepthParam = (long) nodeService.getProperty(actionedUponNodeRef,
+				MonitorModel.PROP_HIERARCHY_DEPTH);
 	}
 
 	private void clearFields() {

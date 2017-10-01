@@ -21,15 +21,19 @@ import com.tieto.ecm.alfresco.monitor.storage.model.JobStatus.Status;
 
 /**
  * 
- * @author D.Katanik, D.Grobelny
+ * @author D.Katanik
+ * @author D.Grobelny
  *
  */
 public class MonitorAclHierarchyAction extends AbstractMonitorExecuterAction {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(MonitorAclHierarchyAction.class);
+	
 	private static final String ROOT_KEY = "*";
 	private static final String DELIMETER = "~";
+	
 	private AuthorityService authorityService;
 	private MonitorStorage monitorStorage;
-	private static final Logger LOGGER = LoggerFactory.getLogger(MonitorAclHierarchyAction.class);
 
 	@Override
 	protected void executeImpl(NodeRef actionedUponNodeRef) {

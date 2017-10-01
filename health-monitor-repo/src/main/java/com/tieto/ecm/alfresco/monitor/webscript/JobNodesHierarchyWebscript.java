@@ -18,9 +18,9 @@ import com.tieto.ecm.alfresco.monitor.service.job.NodesHierarchyJob;
 /**
  * 
  * @author Vitezslav Sliz (vitezslav.sliz@tieto.com)
- * @author Privoznik Tomas
+ * @author Tomas Privoznik
  */
-public class JobNodesHierarchyWebscript extends DeclarativeWebScript{
+public class JobNodesHierarchyWebscript extends DeclarativeWebScript {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(JobNodesHierarchyWebscript.class);
 	
