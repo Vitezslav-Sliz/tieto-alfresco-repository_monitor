@@ -34,6 +34,14 @@
 		  </property>
     </bean>
     
+    <bean id="webscript.com.tieto.ecm.alfresco.monitor.history.history_jobsActions.get" class="com.tieto.ecm.alfresco.monitor.webscript.JobsActionHistoryWebscript" parent="webscript">
+	      <property name="nodeService" ref="nodeService"/>
+	      <property name="monitorStorage" ref="health-monitor-repo_MonitorStorage" />
+	      <property name="limit">
+		      <value>${job.history.limit}</value>
+		  </property>
+    </bean>
+    
     <bean id="webscript.com.tieto.ecm.alfresco.monitor.job.job_sitesCount.get" class="com.tieto.ecm.alfresco.monitor.webscript.SitesCountInitiatorWebscript" parent="webscript">
 	      <property name="job" ref="health-monitor-repo_MonitorJobSitesCount"/>
 	      <property name="monitorService" ref="health-monitor-repo_MonitorService"/>
