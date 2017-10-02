@@ -1,0 +1,9 @@
+<webscript>
+	<shortname>Bootstrap script to create data for demo</shortname>
+	<description>Script will create files.</description>
+	<family>Tieto Custom Web Script</family>
+	<url>/tieto/demo-bootstrap</url>
+	<format default="json"/>
+	<authentication>admin</authentication>
+	<transaction>required</transaction>
+</webscript>
