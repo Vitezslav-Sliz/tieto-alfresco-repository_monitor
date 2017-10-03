@@ -101,6 +101,8 @@ public class JobsActionHistoryWebscript extends DeclarativeWebScript {
 		String nodeRef;
 		String status;
 
+		private JobHistory() {};
+		
 		public String getNodeRef() {
 			return nodeRef;
 		}

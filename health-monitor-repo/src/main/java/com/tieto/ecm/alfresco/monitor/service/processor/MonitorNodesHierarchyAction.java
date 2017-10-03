@@ -34,7 +34,7 @@ public class MonitorNodesHierarchyAction extends AbstractMonitorExecuterAction {
 	private static final Logger LOGGER = LoggerFactory.getLogger(MonitorNodesHierarchyAction.class);
 
 	private List<String> nodeRefs;
-	
+
 	private JSONArray countNodes;
 	private JSONArray depthNodes;
 
@@ -98,7 +98,7 @@ public class MonitorNodesHierarchyAction extends AbstractMonitorExecuterAction {
 		if (isHierarchyInRange(nodesHierarchy, hierarchyDepthParam)) {
 			// save parent node violating hierarchy depth
 			// depth of the parent is determined from current node and hierarchyDepthParam
-			saveNodeAndPath(nodesHierarchy, hierarchyDepthParam, countNodes, ++hierarchyCount);
+			saveNodeAndPath(nodesHierarchy, hierarchyDepthParam, depthNodes, ++hierarchyCount);
 		}
 
 		// get children
@@ -108,7 +108,7 @@ public class MonitorNodesHierarchyAction extends AbstractMonitorExecuterAction {
 		if (isHierarchyInRange(childrenOfNode, numberOfNodesParam)) {
 			// second parameter is 0 because we need to save current node
 			// sentinel is "not used"
-			saveNodeAndPath(nodesHierarchy, 0L, depthNodes, ++childrenCount);
+			saveNodeAndPath(nodesHierarchy, 0L, countNodes, ++childrenCount);
 		}
 
 		// go through all child associations of node
@@ -117,7 +117,8 @@ public class MonitorNodesHierarchyAction extends AbstractMonitorExecuterAction {
 		}
 	}
 
-	private void saveNodeAndPath(List<Pair<String, NodeRef>> nodesHierarchy, final long sentinel, JSONArray nodes, int count) throws JSONException {
+	private void saveNodeAndPath(List<Pair<String, NodeRef>> nodesHierarchy, final long sentinel, JSONArray nodes,
+			int count) throws JSONException {
 		StringBuilder pathBuilder = new StringBuilder();
 		NodeRef nodeRef = null;
 
@@ -141,11 +142,11 @@ public class MonitorNodesHierarchyAction extends AbstractMonitorExecuterAction {
 		ParameterCheck.mandatoryString("Path", path);
 
 		JSONObject tempObj = new JSONObject();
-		
+
 		tempObj.put("nodeRef", nodeRef.toString());
 		tempObj.put("path", path);
 		tempObj.put("nodeCount", count);
-		
+
 		nodes.put(tempObj);
 	}
 
