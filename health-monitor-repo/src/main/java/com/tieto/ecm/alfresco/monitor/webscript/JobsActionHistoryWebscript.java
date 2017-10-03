@@ -18,6 +18,7 @@ import org.springframework.extensions.webscripts.Status;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 
 import com.tieto.ecm.alfresco.monitor.storage.MonitorStorage;
+import com.tieto.ecm.alfresco.monitor.storage.model.JobOperation;
 import com.tieto.ecm.alfresco.monitor.storage.model.MonitorModel;
 
 /**
@@ -28,69 +29,91 @@ import com.tieto.ecm.alfresco.monitor.storage.model.MonitorModel;
 public class JobsActionHistoryWebscript extends DeclarativeWebScript {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(JobsActionHistoryWebscript.class);
-	
+
 	private String limit;
-	
+
 	private NodeService nodeService;
 	private MonitorStorage monitorStorage;
-	
+
 	public void setNodeService(NodeService nodeService) {
 		this.nodeService = nodeService;
 	}
-	
+
 	public void setMonitorStorage(MonitorStorage monitorStorage) {
 		this.monitorStorage = monitorStorage;
 	}
-	
+
 	public void setLimit(String limit) {
 		this.limit = limit;
 	}
-	
+
 	@Override
 	protected Map<String, Object> executeImpl(WebScriptRequest req, Status status, Cache cache) {
 		LOGGER.debug("Initiate run calculation");
-		
+
 		// get parameters
-		int numberOfNodes = acquireIntParameter(req, "limit");
+		int limitNumberOfNodes = acquireIntParameter(req, "limit");
+		String jobOperation = req.getParameter("type");
+
+		List<JobHistory> historicalJobs = getJobsHistory(limitNumberOfNodes, jobOperation);
+
+		final Map<String, Object> model = new HashMap<>();
+		model.put("jobs", historicalJobs);
+		model.put("limit", limitNumberOfNodes);
+		model.put("operation", jobOperation);
 		
+		return model;
+	}
+
+	/**
+	 * Get historical jobs
+	 * 
+	 * @param numberOfNodes
+	 *            how many nodes should be retrieve
+	 * @param operation
+	 *            which job should be retrieve @see {@link JobOperation}
+	 * @return List of jobs in history
+	 */
+	private List<JobHistory> getJobsHistory(int numberOfNodes, String operation) {
 		List<JobHistory> result = new ArrayList<>(numberOfNodes);
-		
+
 		NodeRef node = monitorStorage.getOrCreateMonitorJobsContainer();
 		List<ChildAssociationRef> childAssocs = nodeService.getChildAssocs(node);
 		Collections.reverse(childAssocs);
-		
-		for (ChildAssociationRef child : childAssocs.stream().limit(numberOfNodes).collect(Collectors.toList())) {
+
+		List<ChildAssociationRef> childs = childAssocs.stream()
+				.filter(ch -> ((String) nodeService.getProperty(ch.getChildRef(), MonitorModel.PROP_OPERATION)).equalsIgnoreCase(operation))
+				.limit(numberOfNodes)
+				.collect(Collectors.toList());
+
+		for (ChildAssociationRef child : childs) {
 			JobHistory job = new JobHistory();
-			job.type = (String) nodeService.getProperty(child.getChildRef(), MonitorModel.PROP_OPERATION);
+			job.operation = operation;
 			job.status = (String) nodeService.getProperty(child.getChildRef(), MonitorModel.PROP_STATUS);
 			job.nodeRef = child.getChildRef().toString();
 			result.add(job);
 		}
-
-		final Map<String, Object> model = new HashMap<>();
-		model.put("jobs", result);
-		
-		return model;
+		return result;
 	}
-	
+
 	public class JobHistory {
-		String type;
+		String operation;
 		String nodeRef;
 		String status;
-		
+
 		public String getNodeRef() {
 			return nodeRef;
 		}
-		
+
 		public String getStatus() {
 			return status;
 		}
-		
+
 		public String getType() {
-			return type;
+			return operation;
 		}
 	}
-	
+
 	private int acquireIntParameter(WebScriptRequest req, String parameterName) {
 		String parameter = req.getParameter(parameterName);
 		try {
