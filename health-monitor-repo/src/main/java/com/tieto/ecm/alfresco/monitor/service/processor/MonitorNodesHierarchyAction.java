@@ -2,6 +2,7 @@ package com.tieto.ecm.alfresco.monitor.service.processor;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.alfresco.model.ContentModel;
@@ -12,6 +13,7 @@ import org.alfresco.service.cmr.repository.NodeService;
 import org.alfresco.util.Pair;
 import org.alfresco.util.ParameterCheck;
 import org.apache.commons.io.IOUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -31,8 +33,10 @@ public class MonitorNodesHierarchyAction extends AbstractMonitorExecuterAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(MonitorNodesHierarchyAction.class);
 
-	private List<String> jsonArrayNames;
-	private List<String> jsonArrayNodeRefs;
+	private List<String> nodeRefs;
+	
+	private JSONArray countNodes;
+	private JSONArray depthNodes;
 
 	private int hierarchyCount;
 	private int childrenCount;
@@ -92,10 +96,9 @@ public class MonitorNodesHierarchyAction extends AbstractMonitorExecuterAction {
 
 		// check hierarchy depth
 		if (isHierarchyInRange(nodesHierarchy, hierarchyDepthParam)) {
-			hierarchyCount++;
 			// save parent node violating hierarchy depth
 			// depth of the parent is determined from current node and hierarchyDepthParam
-			saveNodeAndPath(nodesHierarchy, hierarchyDepthParam);
+			saveNodeAndPath(nodesHierarchy, hierarchyDepthParam, countNodes, ++hierarchyCount);
 		}
 
 		// get children
@@ -103,10 +106,9 @@ public class MonitorNodesHierarchyAction extends AbstractMonitorExecuterAction {
 
 		// check number of nodes
 		if (isHierarchyInRange(childrenOfNode, numberOfNodesParam)) {
-			childrenCount++;
 			// second parameter is 0 because we need to save current node
 			// sentinel is "not used"
-			saveNodeAndPath(nodesHierarchy, 0L);
+			saveNodeAndPath(nodesHierarchy, 0L, depthNodes, ++childrenCount);
 		}
 
 		// go through all child associations of node
@@ -115,7 +117,7 @@ public class MonitorNodesHierarchyAction extends AbstractMonitorExecuterAction {
 		}
 	}
 
-	private void saveNodeAndPath(List<Pair<String, NodeRef>> nodesHierarchy, final long sentinel) {
+	private void saveNodeAndPath(List<Pair<String, NodeRef>> nodesHierarchy, final long sentinel, JSONArray nodes, int count) throws JSONException {
 		StringBuilder pathBuilder = new StringBuilder();
 		NodeRef nodeRef = null;
 
@@ -124,8 +126,9 @@ public class MonitorNodesHierarchyAction extends AbstractMonitorExecuterAction {
 			nodeRef = nodesHierarchy.get(i).getSecond();
 		}
 
-		if (!jsonArrayNodeRefs.contains(nodeRef.toString())) {
-			saveNodeToJSONArray(nodeRef.toString(), pathBuilder.toString());
+		if (!nodeRefs.contains(nodeRef.toString() + sentinel)) {
+			nodeRefs.add(nodeRef.toString() + sentinel);
+			saveNodeToJSONArray(nodeRef.toString(), pathBuilder.toString(), nodes, count);
 		}
 	}
 
@@ -133,20 +136,25 @@ public class MonitorNodesHierarchyAction extends AbstractMonitorExecuterAction {
 		return nodesHierarchy.size() > size;
 	}
 
-	private void saveNodeToJSONArray(String nodeRef, String path) {
+	private void saveNodeToJSONArray(String nodeRef, String path, JSONArray nodes, int count) throws JSONException {
 		ParameterCheck.mandatoryString("NodeRef", nodeRef);
 		ParameterCheck.mandatoryString("Path", path);
 
-		jsonArrayNames.add(path);
-		jsonArrayNodeRefs.add(nodeRef);
+		JSONObject tempObj = new JSONObject();
+		
+		tempObj.put("nodeRef", nodeRef.toString());
+		tempObj.put("path", path);
+		tempObj.put("nodeCount", count);
+		
+		nodes.put(tempObj);
 	}
 
 	private JSONObject prepareDataToJSON() throws JSONException {
 		JSONObject result = new JSONObject();
 		JSONObject subJsonObject = new JSONObject();
 
-		subJsonObject.put("count", jsonArrayNames);
-		subJsonObject.put("depth", jsonArrayNodeRefs);
+		subJsonObject.put("count", countNodes);
+		subJsonObject.put("depth", depthNodes);
 		result.put("data", subJsonObject);
 		result.put("numberOfNodeParameter", numberOfNodesParam);
 		result.put("nodesHierarchyParameter", hierarchyDepthParam);
@@ -166,8 +174,9 @@ public class MonitorNodesHierarchyAction extends AbstractMonitorExecuterAction {
 	}
 
 	private void clearFields() {
-		jsonArrayNames = new ArrayList<>();
-		jsonArrayNodeRefs = new ArrayList<>();
+		countNodes = new JSONArray();
+		depthNodes = new JSONArray();
+		nodeRefs = new LinkedList<>();
 		hierarchyCount = 0;
 		childrenCount = 0;
 	}
