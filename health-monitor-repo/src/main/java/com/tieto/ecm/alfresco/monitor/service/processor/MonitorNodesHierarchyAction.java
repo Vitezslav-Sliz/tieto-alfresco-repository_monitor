@@ -106,9 +106,10 @@ public class MonitorNodesHierarchyAction extends AbstractMonitorExecuterAction {
 
 		// check number of nodes
 		if (isHierarchyInRange(childrenOfNode, numberOfNodesParam)) {
+			childrenCount++;
 			// second parameter is 0 because we need to save current node
 			// sentinel is "not used"
-			saveNodeAndPath(nodesHierarchy, 0L, countNodes, ++childrenCount);
+			saveNodeAndPath(nodesHierarchy, 0L, countNodes, childrenOfNode.size());
 		}
 
 		// go through all child associations of node
