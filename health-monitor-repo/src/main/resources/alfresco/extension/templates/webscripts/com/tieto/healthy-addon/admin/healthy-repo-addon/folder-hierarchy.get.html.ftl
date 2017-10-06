@@ -28,6 +28,7 @@
 	<script>
 		$(function() {
 			AdminFH.setServiceContext('${url.serviceContext}');
+			AdminFH.setSelectElementId("versionSelect");
 			AdminFH.initialize();
 		});
 	</script>

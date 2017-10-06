@@ -1,7 +1,7 @@
 <webscript>
   <shortname>Initiate processing of acl analysis</shortname>
   <description>Initiate processing of acl analysis</description>
-  <family>Tieto monitor tool</family>
+  <family>Tieto Healthy Addon</family>
   <url>/api/monitor/job/acl_hierarchy?depth={depth}</url>
   <format default="json">argument</format>
   <authentication>admin</authentication>

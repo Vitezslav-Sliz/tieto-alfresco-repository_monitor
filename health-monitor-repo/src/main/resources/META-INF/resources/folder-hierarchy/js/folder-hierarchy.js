@@ -2,32 +2,42 @@
 var AdminFH = AdminFH || {};
 
 $(function() {
-	var selectedIndex = 0, serviceContext;
+	var selectedIndex = 0, serviceContext, selectElementId;
 	
 	AdminFH.setServiceContext = function setServiceContext(context)
     {
         serviceContext = context;
     };
     
+    AdminFH.setSelectElementId = function setSelectElementId(id){
+		selectElementId = id;
+	}
+    
 	AdminFH.initialize = function initialize(){
 		$.ajax({
-			url: serviceContext + "/tieto/healthy-addon/folder-hierarchy/list-jobs.json",
+			url: serviceContext + "/api/monitor/history/jobs_actions",
+			method: "GET",
+			data: {
+				"limit" : 10, 
+				"jobOperation" : "NODES_HIERARCHY",
+				"jobStatus" : "FINISHED"
+			}
 		}).done(function( data ) {
-			AdminFH.renderSelect(data);
+			AdminFH.renderSelect(data.jobs);
 			AdminFH.render();
 		}).fail(function(jqXHR, textStatus) {
 			console.log("Error while loading list of jobs!");
 		});
 		
-		$("#versionSelect").change(function() {
-			selectedIndex = $("#versionSelect").val();
-			$("#versionSelect option[value="+ selectedIndex + "]").prop('selected',true);
+		$("#" + selectElementId).change(function() {
+			selectedIndex = $("#" + selectElementId).val();
+			$("#" + selectElementId + " option[value="+ selectedIndex + "]").prop('selected',true);
 			AdminFH.render();
 		})
 	}
 	
 	AdminFH.render = function render() {
-		var nodeRef = $("#versionSelect option:selected").text(); 
+		var nodeRef = $("#" + selectElementId + " option:selected").text(); 
 		$.ajax({
 			url: serviceContext + "/tieto/healthy-addon/util/get-content",
 			method: "GET",
@@ -63,7 +73,7 @@ $(function() {
 			htmlDepth += "<div class=\"node-info\"><table>"
 			htmlDepth += "<tr><td class=\"node-header\">NodeRef:</td><td>" + data[i].nodeRef + "</td></tr>";
 			htmlDepth += "<tr><td class=\"node-header\">Path:</td><td><span class=\"path\">" + data[i].path + "</td></tr>";
-			htmlDepth += "<tr><td class=\"node-header\">Node count:</td><td>" + data[i].nodeCount + "</td></tr>";
+			htmlDepth += "<tr><td class=\"node-header\">Node depth:</td><td>" + data[i].nodeCount + "</td></tr>";
 			htmlDepth += "</table></div>"; 
 			htmlDepth += "<hr/>";
 		}
@@ -75,7 +85,7 @@ $(function() {
 		for (var i=0; i < data.length; i++) {
 			htmlSelect += "<option value=\"" + i + "\">" + data[i].nodeRef + "</option>"
 		}
-		$("#versionSelect").html(htmlSelect);
+		$("#" + selectElementId).html(htmlSelect);
 	}
 
 });

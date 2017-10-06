@@ -1,6 +1,7 @@
 {
 	"limit": "${limit!}",
-	"operation": "${type!}",
+	"jobOperation": "${jobOperation!}",
+	"jobStatus": "${jobStatus!}",
 	"jobs" : 
 		[
 			<#list jobs as job>
