@@ -2,7 +2,6 @@ package com.tieto.ecm.alfresco.monitor.service.processor;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.alfresco.model.ContentModel;
@@ -32,8 +31,6 @@ import com.tieto.ecm.alfresco.monitor.storage.model.MonitorModel;
 public class MonitorNodesHierarchyAction extends AbstractMonitorExecuterAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(MonitorNodesHierarchyAction.class);
-
-	private List<String> nodeRefs;
 
 	private JSONArray countNodes;
 	private JSONArray depthNodes;
@@ -96,9 +93,9 @@ public class MonitorNodesHierarchyAction extends AbstractMonitorExecuterAction {
 
 		// check hierarchy depth
 		if (isHierarchyInRange(nodesHierarchy, hierarchyDepthParam)) {
-			// save parent node violating hierarchy depth
-			// depth of the parent is determined from current node and hierarchyDepthParam
-			saveNodeAndPath(nodesHierarchy, hierarchyDepthParam, depthNodes, ++hierarchyCount);
+			hierarchyCount++;
+			// save node
+			saveNodeAndPath(nodesHierarchy, depthNodes, nodesHierarchy.size());
 		}
 
 		// get children
@@ -107,9 +104,8 @@ public class MonitorNodesHierarchyAction extends AbstractMonitorExecuterAction {
 		// check number of nodes
 		if (isHierarchyInRange(childrenOfNode, numberOfNodesParam)) {
 			childrenCount++;
-			// second parameter is 0 because we need to save current node
-			// sentinel is "not used"
-			saveNodeAndPath(nodesHierarchy, 0L, countNodes, childrenOfNode.size());
+			// save node
+			saveNodeAndPath(nodesHierarchy, countNodes, childrenOfNode.size());
 		}
 
 		// go through all child associations of node
@@ -118,27 +114,23 @@ public class MonitorNodesHierarchyAction extends AbstractMonitorExecuterAction {
 		}
 	}
 
-	private void saveNodeAndPath(List<Pair<String, NodeRef>> nodesHierarchy, final long sentinel, JSONArray nodes,
-			int count) throws JSONException {
+	private void saveNodeAndPath(List<Pair<String, NodeRef>> nodesHierarchy, JSONArray nodes,
+			long count) throws JSONException {
 		StringBuilder pathBuilder = new StringBuilder();
 		NodeRef nodeRef = null;
 
-		for (int i = 0; i < nodesHierarchy.size() - sentinel; i++) {
+		for (int i = 0; i < nodesHierarchy.size(); i++) {
 			pathBuilder.append("/").append(nodesHierarchy.get(i).getFirst());
 			nodeRef = nodesHierarchy.get(i).getSecond();
 		}
-
-		if (!nodeRefs.contains(nodeRef.toString() + sentinel)) {
-			nodeRefs.add(nodeRef.toString() + sentinel);
-			saveNodeToJSONArray(nodeRef.toString(), pathBuilder.toString(), nodes, count);
-		}
+		saveNodeToJSONArray(nodeRef.toString(), pathBuilder.toString(), nodes, count);
 	}
 
 	private <T> boolean isHierarchyInRange(List<T> nodesHierarchy, long size) throws NullPointerException {
 		return nodesHierarchy.size() > size;
 	}
 
-	private void saveNodeToJSONArray(String nodeRef, String path, JSONArray nodes, int count) throws JSONException {
+	private void saveNodeToJSONArray(String nodeRef, String path, JSONArray nodes, long count) throws JSONException {
 		ParameterCheck.mandatoryString("NodeRef", nodeRef);
 		ParameterCheck.mandatoryString("Path", path);
 
@@ -178,7 +170,6 @@ public class MonitorNodesHierarchyAction extends AbstractMonitorExecuterAction {
 	private void clearFields() {
 		countNodes = new JSONArray();
 		depthNodes = new JSONArray();
-		nodeRefs = new LinkedList<>();
 		hierarchyCount = 0;
 		childrenCount = 0;
 	}
