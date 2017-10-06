@@ -6,6 +6,10 @@
 	<div id="groups"></div>
 
 	<script>
-		var serviceContext = '${url.serviceContext}';
+		$(function() {
+			AdminGH.setServiceContext('${url.serviceContext}');
+			AdminGH.initialize();
+		});
 	</script>
+	
 </@page>

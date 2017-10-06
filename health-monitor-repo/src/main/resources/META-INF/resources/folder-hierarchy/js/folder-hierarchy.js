@@ -2,26 +2,31 @@
 var AdminFH = AdminFH || {};
 
 $(function() {
-	var selected, versionInJson;
-	selected = 0;
-	$.ajax({
-		url: serviceContext + "/tieto/healthy-addon/folder-hierarchy/list-jobs.json",
-	}).done(function( data ) {
-		versionInJson = data; 
-		AdminFH.renderSelect(versionInJson);
-		AdminFH.render();
-	}).fail(function(jqXHR, textStatus) {
-		console.log("Error while loading list of jobs!");
-	});
+	var selectedIndex = 0, serviceContext;
 	
-	$("#versionSelect").change(function() {
-		selected = $("#versionSelect").val();
-		$("#versionSelect option[value="+ selected + "]").prop('selected',true);
-		AdminFH.render();
-	})
+	AdminFH.setServiceContext = function setServiceContext(context)
+    {
+        serviceContext = context;
+    };
+    
+	AdminFH.initialize = function initialize(){
+		$.ajax({
+			url: serviceContext + "/tieto/healthy-addon/folder-hierarchy/list-jobs.json",
+		}).done(function( data ) {
+			AdminFH.renderSelect(data);
+			AdminFH.render();
+		}).fail(function(jqXHR, textStatus) {
+			console.log("Error while loading list of jobs!");
+		});
+		
+		$("#versionSelect").change(function() {
+			selectedIndex = $("#versionSelect").val();
+			$("#versionSelect option[value="+ selectedIndex + "]").prop('selected',true);
+			AdminFH.render();
+		})
+	}
 	
 	AdminFH.render = function render() {
-		var currentVersion = versionInJson[selected];
 		var nodeRef = $("#versionSelect option:selected").text(); 
 		$.ajax({
 			url: serviceContext + "/tieto/healthy-addon/util/get-content",

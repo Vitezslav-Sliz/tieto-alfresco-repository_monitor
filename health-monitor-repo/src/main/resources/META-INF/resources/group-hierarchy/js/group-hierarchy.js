@@ -2,17 +2,22 @@
 var AdminGH = AdminGH || {};
 
 $(function() {
-	var nodeRef;
-	selected = 0;
-	$.ajax({
-		url : serviceContext + "/api/monitor/job/acl_hierarchy",
-	}).done(function(data) {
-		nodeRef = data.monitorJob;
-		AdminGH.render();
-	}).fail(function(jqXHR, textStatus) {
-		console.log("Error while calling group hierarchy webscript!");
-	});
+	var nodeRef, serviceContext;
 	
+	AdminGH.setServiceContext = function setServiceContext(context){
+		serviceContext = context;
+	}
+	
+	AdminGH.initialize = function initialize(){
+		$.ajax({
+			url : serviceContext + "/api/monitor/job/acl_hierarchy",
+		}).done(function(data) {
+			nodeRef = data.monitorJob;
+			AdminGH.render();
+		}).fail(function(jqXHR, textStatus) {
+			console.log("Error while calling group hierarchy webscript!");
+		});
+	}
 
 	AdminGH.render = function render() {
 		//This is only temporary solution!
