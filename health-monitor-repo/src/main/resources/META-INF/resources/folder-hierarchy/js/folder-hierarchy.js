@@ -19,7 +19,8 @@ $(function() {
 			method: "GET",
 			data: {
 				"limit" : 10, 
-				"type" : "NODES_HIERARCHY"
+				"jobOperation" : "NODES_HIERARCHY",
+				"jobStatus" : "FINISHED"
 			}
 		}).done(function( data ) {
 			AdminFH.renderSelect(data.jobs);
@@ -72,7 +73,7 @@ $(function() {
 			htmlDepth += "<div class=\"node-info\"><table>"
 			htmlDepth += "<tr><td class=\"node-header\">NodeRef:</td><td>" + data[i].nodeRef + "</td></tr>";
 			htmlDepth += "<tr><td class=\"node-header\">Path:</td><td><span class=\"path\">" + data[i].path + "</td></tr>";
-			htmlDepth += "<tr><td class=\"node-header\">Node count:</td><td>" + data[i].nodeCount + "</td></tr>";
+			htmlDepth += "<tr><td class=\"node-header\">Node depth:</td><td>" + data[i].nodeCount + "</td></tr>";
 			htmlDepth += "</table></div>"; 
 			htmlDepth += "<hr/>";
 		}

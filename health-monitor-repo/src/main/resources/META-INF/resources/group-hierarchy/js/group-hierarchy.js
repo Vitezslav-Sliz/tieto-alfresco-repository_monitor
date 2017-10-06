@@ -18,7 +18,8 @@ $(function() {
 			method: "GET",
 			data: {
 				"limit" : 10, 
-				"type" : "PERMISSION_GROUPS_HIERARCHY"
+				"jobOperation" : "PERMISSION_GROUPS_HIERARCHY",
+				"jobStatus" : "FINISHED"
 			}
 		}).done(function( data ) {
 			AdminGH.renderSelect(data.jobs);
@@ -51,7 +52,7 @@ $(function() {
 		}).done(function( data ) {
 			var htmlGroups = "";
 			for (i = 0; i < data.length; i++) {
-				for (j = 0; j < data.length; j++) {
+				for (j = 0; j < data[i].length; j++) {
 					htmlGroups += data[i][j] + "/";
 				}
 				htmlGroups += "<hr/>";
