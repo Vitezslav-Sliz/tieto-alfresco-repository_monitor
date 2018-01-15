@@ -10,6 +10,22 @@ Let's implement a new addon which will review a repository health. There are sev
 
 Those healthy checks are inspired by [Luis Cabaceira](https://community.alfresco.com/people/lcabaceira) [blog](https://community.alfresco.com/people/lcabaceira/blog/2017/04/26/alfresco-best-practices) (chapter 8)
 
+## Ideas for DevCon 2018
+### General tasks
+	- "Select job" with useful data:
+		- Date + Folder which was used as start location
+	- Option to start job directly from Admin console
+		- Is possible already to run the job from Support Tools (Scheduled jobs)
+	- Job cleaner
+	- Display more data about job execution
+		- For example who initiated the run, how long it took, location "top" folder
+### Folder hierarchy 
+	- Combine part "Nodes that exceeded node depth" to cover 16 + 17 + 18 + 19 + 20 in one record
+	- Try to use "SQL approach" instead of NodeService
+	- Adjust job to be run against specific location, for example only for specific site (/app:company_home/st:sites/cm:swsdp)
+### Group hierarchy
+	- Combine group list in the same manner as previous task
+
 ## Implementation
 
 ### Jobs
