@@ -51,10 +51,11 @@ public class MonitorSearchServiceImpl implements MonitorSearchService {
 		final List<ChildAssociationRef> childAssocsLimit = streamChildrenAssocs.limit(count).collect(Collectors.toList());
 
 		for (ChildAssociationRef child : childAssocsLimit) {
-			final String nodeStatus = INSTANCE.convert(String.class, nodeService.getProperty(child.getChildRef(), MonitorModel.PROP_STATUS));
 			final NodeRef nodeRef = child.getChildRef();
-			final Date date = INSTANCE.convert(Date.class, nodeService.getProperty(child.getChildRef(), ContentModel.PROP_CREATED));
-			result.add(new JobHistory(operation, nodeRef, nodeStatus, date));
+			final String nodeStatus = INSTANCE.convert(String.class, nodeService.getProperty(nodeRef, MonitorModel.PROP_STATUS));
+			final Date date = INSTANCE.convert(Date.class, nodeService.getProperty(nodeRef, ContentModel.PROP_CREATED));
+			final String operHist = INSTANCE.convert(String.class, nodeService.getProperty(nodeRef, MonitorModel.PROP_OPERATION));		
+			result.add(new JobHistory(operHist, nodeRef, nodeStatus, date));
 		}
 		return result;
 	}
