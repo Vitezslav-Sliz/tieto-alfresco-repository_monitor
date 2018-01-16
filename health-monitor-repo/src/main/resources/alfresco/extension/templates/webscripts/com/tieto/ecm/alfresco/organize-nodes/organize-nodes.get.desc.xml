@@ -1,0 +1,8 @@
+<webscript>
+  <shortname>Fetch Node Metadata</shortname>
+  <description>Fetch Node Metadata - Like type and models</description>
+  <family>Tieto Healthy Addon</family>
+  <url>/fetch/node/metadata</url>
+  <format default="json">argument</format>
+  <authentication>admin</authentication>
+</webscript>

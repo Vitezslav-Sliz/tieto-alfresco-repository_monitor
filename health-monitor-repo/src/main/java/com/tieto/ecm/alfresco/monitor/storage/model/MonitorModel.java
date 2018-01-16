@@ -39,4 +39,9 @@ public interface MonitorModel {
 	public static final QName PROP_HIERARCHY_DEPTH = QName.createQName(TIETO_MONITOR_MODEL_1_0_URI, "hierarchyDepth");
 	
 	public static final QName PROP_NUMBER_OF_CHILDREN = QName.createQName(TIETO_MONITOR_MODEL_1_0_URI, "numberOfChildren");
+	
+	/***********Sample Types*************/
+	public static final QName TYPE_INVOICE= QName.createQName(TIETO_MONITOR_MODEL_1_0_URI, "invoice");
+	public static final QName TYPE_REPORT_DOCUMENT= QName.createQName(TIETO_MONITOR_MODEL_1_0_URI, "reportDocument");
+	public static final QName TYPE_STANDARD_DOCUMENT= QName.createQName(TIETO_MONITOR_MODEL_1_0_URI, "standardDocument");
 }

@@ -134,5 +134,39 @@
                 <aspect>cm:auditable</aspect>
             </mandatory-aspects>
         </type>
+		<type name="tietoMonitor:invoice">
+			<title>Invoice</title>
+            <parent>cm:content</parent>
+            <archive>false</archive>
+            <properties/>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects>
+                <aspect>cm:auditable</aspect>
+            </mandatory-aspects>
+        </type>
+        <type name="tietoMonitor:standardDocument">
+			<title>Standard Document</title>
+            <parent>cm:content</parent>
+            <archive>false</archive>
+            <properties/>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects>
+                <aspect>cm:auditable</aspect>
+            </mandatory-aspects>
+        </type>
+        <type name="tietoMonitor:reportDocument">
+			<title>Report Document</title>
+            <parent>cm:content</parent>
+            <archive>false</archive>
+            <properties/>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects>
+                <aspect>cm:auditable</aspect>
+            </mandatory-aspects>
+        </type>
+        
     </types>
 </model>

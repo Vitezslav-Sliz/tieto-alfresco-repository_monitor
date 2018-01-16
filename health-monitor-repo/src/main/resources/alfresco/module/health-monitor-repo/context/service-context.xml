@@ -81,4 +81,13 @@
 		<property name="transactionHelper" ref="retryingTransactionHelper"/>
 	</bean>
 	
+	<bean id="webscript.com.tieto.ecm.alfresco.organize-nodes.organize-nodes.get"
+		class="com.organize.nodes.webscript.FetchNodeMetadata"
+		parent="webscript">
+		<property name="dictionaryService" ref="dictionaryService" />
+		<property name="serviceRegistry" ref="ServiceRegistry" />
+		<property name="repositoryHelper" ref="repositoryHelper"/>
+		
+	</bean>
+	
 </beans>
