@@ -2,6 +2,8 @@ package com.tieto.ecm.alfresco.monitor.trigger;
 
 import org.alfresco.error.AlfrescoRuntimeException;
 import org.alfresco.repo.security.authentication.AuthenticationUtil;
+import org.alfresco.repo.transaction.RetryingTransactionHelper;
+import org.alfresco.repo.transaction.RetryingTransactionHelper.RetryingTransactionCallback;
 import org.alfresco.schedule.AbstractScheduledLockedJob;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.StoreRef;
@@ -16,7 +18,6 @@ import com.tieto.ecm.alfresco.monitor.service.MonitorJobService;
 import com.tieto.ecm.alfresco.monitor.service.job.NodesHierarchyJob;
 
 public class NodesHierarchyTriggerJob extends AbstractScheduledLockedJob implements StatefulJob {
-	
 
 	@Override
 	public void executeJob(JobExecutionContext context) throws JobExecutionException {
@@ -32,20 +33,27 @@ public class NodesHierarchyTriggerJob extends AbstractScheduledLockedJob impleme
 		if (executerCreateObj == null || !(executerCreateObj instanceof NodesHierarchyJob)) {
 			throw new AlfrescoRuntimeException("SitesCountJob data must contain valid 'CreateExecuter' reference");
 		}
+		Object executerTransactHelper = jobData.get("jobTransactionHelper");
+		if (executerTransactHelper == null || !(executerTransactHelper instanceof RetryingTransactionHelper)) {
+			throw new AlfrescoRuntimeException(
+					"jobTransactionHelper data must contain valid 'Transaction helper' reference");
+		}
 		final NodesHierarchyJob jobCreateExecuter = (NodesHierarchyJob) executerCreateObj;
 		final MonitorJobService jobExecuter = (MonitorJobService) executerObj;
-
+		final RetryingTransactionHelper transactionHelper = (RetryingTransactionHelper) executerTransactHelper;
 		AuthenticationUtil.runAs(new AuthenticationUtil.RunAsWork<Object>() {
 
 			public Object doWork() throws Exception {
-				
-				final NodeRef jobNode = jobCreateExecuter.createTriggerJob();
-				jobExecuter.runMonitorOperation(jobNode);
-				return null;
+				return transactionHelper.doInTransaction(new RetryingTransactionCallback<NodeRef>() {
+					@Override
+					public NodeRef execute() throws Throwable {
+						final NodeRef jobNode = jobCreateExecuter.createTriggerJob();
+						jobExecuter.runMonitorOperation(jobNode);
+						return null;
+					}
+				}, false, true);
 			}
 		}, AuthenticationUtil.getSystemUserName());
 	}
-
-	
 
 }
