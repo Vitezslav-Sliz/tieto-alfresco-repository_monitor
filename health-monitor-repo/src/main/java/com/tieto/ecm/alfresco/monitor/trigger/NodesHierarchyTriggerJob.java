@@ -25,7 +25,7 @@ public class NodesHierarchyTriggerJob extends AbstractScheduledLockedJob impleme
 		// Extract the Job executer to use
 		Object executerObj = jobData.get("jobExecuter");
 		if (executerObj == null || !(executerObj instanceof MonitorJobService)) {
-			throw new AlfrescoRuntimeException("SitesCountJob data must contain valid 'Executer' reference");
+			throw new AlfrescoRuntimeException("Job data must contain valid 'Executer' reference");
 		}
 
 		Object executerCreateObj = jobData.get("jobCreateExecuter");

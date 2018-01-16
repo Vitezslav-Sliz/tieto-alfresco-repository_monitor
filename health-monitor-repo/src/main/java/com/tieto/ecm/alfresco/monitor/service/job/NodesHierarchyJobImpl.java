@@ -9,10 +9,13 @@ import org.alfresco.service.cmr.repository.StoreRef;
 import org.alfresco.service.cmr.search.ResultSet;
 import org.alfresco.service.cmr.search.SearchService;
 import org.alfresco.util.ParameterCheck;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.tieto.ecm.alfresco.monitor.storage.MonitorStorage;
 import com.tieto.ecm.alfresco.monitor.storage.model.JobOperation;
 import com.tieto.ecm.alfresco.monitor.storage.model.MonitorModel;
+import com.tieto.ecm.alfresco.monitor.webscript.JobNodesHierarchyWebscript;
 
 public class NodesHierarchyJobImpl extends BaseProcessorExtension implements NodesHierarchyJob {
 
@@ -22,6 +25,7 @@ public class NodesHierarchyJobImpl extends BaseProcessorExtension implements Nod
 	private String hierarchyDepth;
 	private String numberOfNodes;
 	private String sourcePathName;
+	private static final Logger LOGGER = LoggerFactory.getLogger(NodesHierarchyJobImpl.class);
 
 	public void setSearchService(SearchService searchService) {
 		this.searchService = searchService;
@@ -96,6 +100,7 @@ public class NodesHierarchyJobImpl extends BaseProcessorExtension implements Nod
 		NodeRef sourcePathNodeRef = getNodeFromPathName(sourcePathName);
 		int nOfN = Integer.valueOf(numberOfNodes);
 		int hDepth = Integer.valueOf(hierarchyDepth);
+		LOGGER.debug("sourcePathNoderef {},nOfN {},hDepth {}",new Object[] {sourcePathNodeRef, nOfN, hDepth} );
 		return createNodesHierarchyJob(sourcePathNodeRef, nOfN, hDepth);
 	}
 }
