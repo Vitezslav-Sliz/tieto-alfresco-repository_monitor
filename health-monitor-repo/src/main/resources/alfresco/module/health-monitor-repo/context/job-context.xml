@@ -22,8 +22,8 @@
           
 	<bean id="monitor_job_nodesHierarchy" class="com.tieto.ecm.alfresco.monitor.service.processor.MonitorNodesHierarchyAction" parent="health-monitor-repo_abstractExecuterAction">
     	<property name="nodeService" ref="nodeService"/>
-    	<property name="authenticationService" ref="authenticationService"/>
     	<property name="repositoryHelper" ref="repositoryHelper"/>
+    	<property name="authenticationService" ref="authenticationService"/>
 	</bean>
 
 	<bean id="monitor_job_aclHierarchy" class="com.tieto.ecm.alfresco.monitor.service.processor.MonitorAclHierarchyAction" parent="health-monitor-repo_abstractExecuterAction">

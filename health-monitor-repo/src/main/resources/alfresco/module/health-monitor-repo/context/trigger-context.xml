@@ -42,6 +42,25 @@
 			</map>
 		</property>
 	</bean>
+	
+	<bean id="com.tieto.ecm.alfresco.NodesHierarchyJob.JobDetail" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+			<value>com.tieto.ecm.alfresco.monitor.trigger.NodesHierarchyTriggerJob</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="jobExecuter">
+					<ref bean="health-monitor-repo_MonitorService" />
+				</entry>
+				<entry key="jobCreateExecuter">
+					<ref bean="health-monitor-repo_MonitorJobNodesHierarchy" />
+				</entry>
+				<entry key="jobLockService">
+					<ref bean="jobLockService" />
+				</entry>
+			</map>
+		</property>
+	</bean>
 
 	<!-- Job trigger bean -->
 	<bean id="com.tieto.ecm.alfresco.sitescount.SitesCountJob.trigger" class="org.alfresco.util.CronTriggerBean">
@@ -50,6 +69,21 @@
 		</property>
 		<property name="jobDetail">
 			<ref bean="com.tieto.ecm.alfresco.sitescount.SitesCountJob.JobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>${sitescount.job.cron}</value>
+		</property>
+		<property name="startDelay">
+      		<value>${sitescount.job.cronstartdelay}</value>
+  		</property>
+	</bean>
+	
+	<bean id="com.tieto.ecm.alfresco.sitescount.NodeHierarchyCountJob.trigger" class="org.alfresco.util.CronTriggerBean">
+		<property name="scheduler">
+			<ref bean="schedulerFactory" />
+		</property>
+		<property name="jobDetail">
+			<ref bean="com.tieto.ecm.alfresco.NodesHierarchyJob.JobDetail" />
 		</property>
 		<property name="cronExpression">
 			<value>${sitescount.job.cron}</value>

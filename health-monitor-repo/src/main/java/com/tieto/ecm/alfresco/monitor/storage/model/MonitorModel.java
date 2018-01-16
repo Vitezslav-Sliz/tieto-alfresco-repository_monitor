@@ -21,6 +21,7 @@ public interface MonitorModel {
 	public static final QName TYPE_MONITOR = QName.createQName(TIETO_MONITOR_MODEL_1_0_URI, "monitor");
 	
 	public static final QName TYPE_MONITOR_NODES_HIERARCHY = QName.createQName(TIETO_MONITOR_MODEL_1_0_URI, "nodesHierarchy");
+	public static final QName TYPE_MONITOR_GROUPS_HIERARCHY = QName.createQName(TIETO_MONITOR_MODEL_1_0_URI, "groupsHierarchy");
 
 	public static final QName TYPE_MONITOR_ACL_HIERARCHY = QName.createQName(TIETO_MONITOR_MODEL_1_0_URI, "aclHierarchy");
 	
