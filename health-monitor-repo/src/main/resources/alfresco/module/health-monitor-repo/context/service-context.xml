@@ -81,7 +81,8 @@
 		<property name="transactionHelper" ref="retryingTransactionHelper"/>
 	</bean>
 	
-	<bean id="health-monitor-repo_MonitorSearchService" class="com.tieto.ecm.alfresco.monitor.service.MonitorSearchServiceImpl">
+	<bean id="health-monitor-repo_MonitorSearchService" class="com.tieto.ecm.alfresco.monitor.service.MonitorSearchServiceImpl" parent="baseJavaScriptExtension">
+		<property name="extensionName" value ="monitorJobSearchService" />
 		<property name="nodeService" ref="nodeService"/>
 		<property name="monitorStorage" ref="health-monitor-repo_MonitorStorage" />
 	</bean>

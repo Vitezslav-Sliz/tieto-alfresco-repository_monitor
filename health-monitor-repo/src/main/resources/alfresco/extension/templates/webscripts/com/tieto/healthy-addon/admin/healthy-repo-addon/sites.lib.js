@@ -23,14 +23,12 @@
 function getSitesCount()
 {
  
-	var node = monitorService.
- 	var node = search.findNode('workspace://SpacesStore/ccfa3a3e-3905-4c6b-aed0-3770e6084e00'); 
-
- 	if (!node) {
- 		model.node = {'sitesCount': 10};
- 	} else {
-		model.node = jsonUtils.toObject(node.content);	 		
- 	}
+	var list = monitorJobSearchService.getJobsHistory("1", "SITES_COUNT","FINISHED");
 	
-   
+ 	if (list) {
+ 		var node = search.findNode(list.get(0).nodeRef);
+ 		model.node = jsonUtils.toObject(node.content);	 		
+ 	} else {
+ 		model.node = {'sitesCount': "UNKNOWN"};
+ 	}
 }

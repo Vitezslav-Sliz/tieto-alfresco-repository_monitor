@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.alfresco.model.ContentModel;
+import org.alfresco.repo.processor.BaseProcessorExtension;
 import org.alfresco.service.cmr.repository.ChildAssociationRef;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.NodeService;
@@ -18,7 +19,7 @@ import com.tieto.ecm.alfresco.monitor.service.pojo.JobHistory;
 import com.tieto.ecm.alfresco.monitor.storage.MonitorStorage;
 import com.tieto.ecm.alfresco.monitor.storage.model.MonitorModel;
 
-public class MonitorSearchServiceImpl implements MonitorSearchService {
+public class MonitorSearchServiceImpl extends BaseProcessorExtension implements MonitorSearchService {
 
 	private NodeService nodeService;
 	private MonitorStorage monitorStorage;	
