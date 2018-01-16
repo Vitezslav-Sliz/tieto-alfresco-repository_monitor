@@ -23,10 +23,11 @@
 function getSitesCount()
 {
  
- 	var node = search.findNode('workspace://SpacesStore/38c66bd0-40ca-4de3-bf5f-206de85d64b55'); 
+	var node = monitorService.
+ 	var node = search.findNode('workspace://SpacesStore/ccfa3a3e-3905-4c6b-aed0-3770e6084e00'); 
 
  	if (!node) {
- 		model.node = {'sitesCount': 8};
+ 		model.node = {'sitesCount': 10};
  	} else {
 		model.node = jsonUtils.toObject(node.content);	 		
  	}
