@@ -22,8 +22,13 @@
  */
 
 function getAllVersions(path) {
-	var tietoFolder = companyhome.childByNamePath(path).getChildren();
+	var path = companyhome.childByNamePath(path);
 	var versionsList = "\'[";
+	if(path == null){
+		versionsList += "]\'";
+		return versionList;
+	}		
+	var tietoFolder = path.getChildren();
 	for (var i = 0; i < tietoFolder.length; i++) {
 		versionsList +=("{\"nodeRef\":\"" + tietoFolder[i].getNodeRef() + "\" , \"path\":\"" + tietoFolder[i].displayPath + "/" + tietoFolder[i].name + "\", \"count\": \"1521\", \"data\": " + tietoFolder[i].content + " }");
 		if (i < tietoFolder.length - 1) {
