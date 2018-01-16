@@ -37,7 +37,9 @@ $(function() {
 	}
 	
 	AdminFH.render = function render() {
-		var nodeRef = $("#" + selectElementId + " option:selected").text(); 
+		// Let's display date when the job was started
+		var optionValueArray = $("#" + selectElementId + " option:selected").text().split("|");
+		var nodeRef = optionValueArray[1].trim();
 		$.ajax({
 			url: serviceContext + "/tieto/healthy-addon/util/get-content",
 			method: "GET",
@@ -83,7 +85,7 @@ $(function() {
 	AdminFH.renderSelect = function renderSelect(data) {
 		var htmlSelect = "";
 		for (var i=0; i < data.length; i++) {
-			htmlSelect += "<option value=\"" + i + "\">" + data[i].nodeRef + "</option>"
+			htmlSelect += "<option value=\"" + i + "\">" + data[i].date + " | " +  data[i].nodeRef + "</option>"
 		}
 		$("#" + selectElementId).html(htmlSelect);
 	}

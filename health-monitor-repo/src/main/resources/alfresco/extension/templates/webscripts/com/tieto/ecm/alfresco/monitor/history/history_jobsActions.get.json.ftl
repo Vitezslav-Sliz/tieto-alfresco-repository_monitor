@@ -8,7 +8,8 @@
 				{
 				   	"nodeRef": "${job.nodeRef!}",
 				   	"operation": "${job.operation!}",
-				   	"status": "${job.status!}"
+				   	"status": "${job.status!}",
+				   	"date": "${job.date?datetime}"
 				}<#if job_has_next>,</#if>
 			</#list>
 		]

@@ -2,12 +2,14 @@ package com.tieto.ecm.alfresco.monitor.webscript;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.alfresco.model.ContentModel;
 import org.alfresco.service.cmr.repository.ChildAssociationRef;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.NodeService;
@@ -103,6 +105,7 @@ public class JobsActionHistoryWebscript extends DeclarativeWebScript {
 			job.operation = operation;
 			job.status = (String) nodeService.getProperty(child.getChildRef(), MonitorModel.PROP_STATUS);
 			job.nodeRef = child.getChildRef().toString();
+			job.date = (Date) nodeService.getProperty(child.getChildRef(), ContentModel.PROP_CREATED);
 			result.add(job);
 		}
 		return result;
@@ -112,6 +115,7 @@ public class JobsActionHistoryWebscript extends DeclarativeWebScript {
 		String operation;
 		String nodeRef;
 		String status;
+		Date date;
 
 		private JobHistory() {};
 		
@@ -125,6 +129,10 @@ public class JobsActionHistoryWebscript extends DeclarativeWebScript {
 
 		public String getType() {
 			return operation;
+		}
+		
+		public Date getDate() {
+			return date;
 		}
 	}
 
