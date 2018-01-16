@@ -2,6 +2,8 @@ package com.tieto.ecm.alfresco.monitor.trigger;
 
 import org.alfresco.error.AlfrescoRuntimeException;
 import org.alfresco.repo.security.authentication.AuthenticationUtil;
+import org.alfresco.repo.transaction.RetryingTransactionHelper;
+import org.alfresco.repo.transaction.RetryingTransactionHelper.RetryingTransactionCallback;
 import org.alfresco.schedule.AbstractScheduledLockedJob;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.quartz.JobDataMap;
@@ -28,14 +30,26 @@ public class SitesCountTriggerJob extends AbstractScheduledLockedJob implements 
 		if (executerCreateObj == null || !(executerCreateObj instanceof SitesCountJob)) {
 			throw new AlfrescoRuntimeException("SitesCountJob data must contain valid 'CreateExecuter' reference");
 		}
+		
+		Object executerTransactHelper = jobData.get("jobTransactionHelper");
+		if (executerTransactHelper == null || !(executerTransactHelper instanceof RetryingTransactionHelper)) {
+			throw new AlfrescoRuntimeException("jobTransactionHelper data must contain valid 'Transaction helper' reference");
+		}
+		
 		final SitesCountJob jobCreateExecuter = (SitesCountJob) executerCreateObj;
 		final MonitorJobService jobExecuter = (MonitorJobService) executerObj;
-
-		AuthenticationUtil.runAs(new AuthenticationUtil.RunAsWork<Object>() {
-			public Object doWork() throws Exception {
-				final NodeRef jobNode = jobCreateExecuter.createSitesCountJob();
-				jobExecuter.runMonitorOperation(jobNode);
-				return null;
+		final RetryingTransactionHelper transactionHelper = (RetryingTransactionHelper)executerTransactHelper;
+		
+		AuthenticationUtil.runAs(new AuthenticationUtil.RunAsWork<NodeRef>() {
+			public NodeRef doWork() throws Exception {
+				return transactionHelper.doInTransaction(new RetryingTransactionCallback<NodeRef>() {
+					@Override
+					public NodeRef execute() throws Throwable {
+						final NodeRef jobNode = jobCreateExecuter.createSitesCountJob();
+						jobExecuter.runMonitorOperation(jobNode);
+						return jobNode;
+					}
+				}, false, true);
 			}
 		}, AuthenticationUtil.getSystemUserName());
 	}

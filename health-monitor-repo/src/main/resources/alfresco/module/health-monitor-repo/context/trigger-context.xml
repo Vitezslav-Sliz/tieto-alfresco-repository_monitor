@@ -33,6 +33,9 @@
 				<entry key="jobCreateExecuter">
 					<ref bean="health-monitor-repo_MonitorJobSitesCount" />
 				</entry>
+				<entry key="jobTransactionHelper">
+					<ref bean="retryingTransactionHelper" />
+				</entry>
 				<entry key="jobLockService">
 					<ref bean="jobLockService" />
 				</entry>
