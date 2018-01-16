@@ -9,6 +9,7 @@ import org.alfresco.repo.model.Repository;
 import org.alfresco.service.cmr.repository.ChildAssociationRef;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.NodeService;
+import org.alfresco.service.cmr.security.AuthenticationService;
 import org.alfresco.util.Pair;
 import org.alfresco.util.ParameterCheck;
 import org.apache.commons.io.IOUtils;
@@ -42,10 +43,15 @@ public class MonitorNodesHierarchyAction extends AbstractMonitorExecuterAction {
 	private long hierarchyDepthParam;
 
 	private NodeService nodeService;
+	private AuthenticationService authenticationService;
 	private Repository repositoryHelper;
 
 	public void setNodeService(NodeService nodeService) {
 		this.nodeService = nodeService;
+	}
+	
+	public void setAuthenticationService(AuthenticationService authenticationService) {
+		this.authenticationService = authenticationService;
 	}
 
 	public void setRepositoryHelper(Repository repositoryHelper) {
@@ -149,7 +155,7 @@ public class MonitorNodesHierarchyAction extends AbstractMonitorExecuterAction {
 	private JSONObject prepareDataToJSON() throws JSONException {
 		JSONObject result = new JSONObject();
 		JSONObject subJsonObject = new JSONObject();
-
+		
 		subJsonObject.put("count", countNodes);
 		subJsonObject.put("depth", depthNodes);
 		result.put("data", subJsonObject);
@@ -159,6 +165,8 @@ public class MonitorNodesHierarchyAction extends AbstractMonitorExecuterAction {
 		result.put("numberOfChildrenCount", childrenCount);
 		result.put("server", "host");
 		result.put("time", LocalDateTime.now().toString());
+		result.put("runBy", authenticationService.getCurrentUserName());
+		result.put("completedTime", "To be added");
 
 		return result;
 	}

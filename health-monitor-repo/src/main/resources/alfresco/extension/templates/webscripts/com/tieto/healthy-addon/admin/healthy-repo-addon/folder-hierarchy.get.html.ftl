@@ -6,6 +6,8 @@
 	    <div class="info-container-block">
 	    	Time: <span id="time"></span></br>
 			Server: <span id="server"></span></br>
+			Run by: <span id="runBy"></span></br>
+			Completed in: <span id="completedTime"></span></br>
 	    </div>
 	    <div class="info-container-block">
 	    	<span id="job-select-label">Select job:</span></br>

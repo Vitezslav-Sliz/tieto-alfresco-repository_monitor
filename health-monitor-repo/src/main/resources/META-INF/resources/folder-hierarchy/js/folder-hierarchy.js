@@ -47,6 +47,8 @@ $(function() {
 		}).done(function( data ) {
 			$("#time").text(data.time);
 			$("#server").text(data.server);
+			$("#runBy").text(data.runBy);
+			$("#completedTime").text(data.completedTime);
 			AdminFH.renderCount(data.data.count);
 			AdminFH.renderDepth(data.data.depth);
 			$(".path").shorten();
