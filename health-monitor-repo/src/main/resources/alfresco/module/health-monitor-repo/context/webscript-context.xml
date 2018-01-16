@@ -35,8 +35,7 @@
     </bean>
     
     <bean id="webscript.com.tieto.ecm.alfresco.monitor.history.history_jobsActions.get" class="com.tieto.ecm.alfresco.monitor.webscript.JobsActionHistoryWebscript" parent="webscript">
-	      <property name="nodeService" ref="nodeService"/>
-	      <property name="monitorStorage" ref="health-monitor-repo_MonitorStorage" />
+	      <property name="monitorSearchService" ref="health-monitor-repo_MonitorSearchService" />
 	      <property name="limit">
 		      <value>${job.history.limit}</value>
 		  </property>
