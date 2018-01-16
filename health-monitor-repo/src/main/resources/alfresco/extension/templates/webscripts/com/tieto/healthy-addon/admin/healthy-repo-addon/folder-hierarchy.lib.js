@@ -26,7 +26,7 @@ function getAllVersions(path) {
 	var versionsList = "\'[";
 	if(path == null){
 		versionsList += "]\'";
-		return versionList;
+		return versionsList;
 	}		
 	var tietoFolder = path.getChildren();
 	for (var i = 0; i < tietoFolder.length; i++) {
