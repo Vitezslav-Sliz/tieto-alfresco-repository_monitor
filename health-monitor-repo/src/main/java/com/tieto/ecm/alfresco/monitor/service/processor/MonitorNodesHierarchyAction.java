@@ -64,7 +64,7 @@ public class MonitorNodesHierarchyAction extends AbstractMonitorExecuterAction {
 
 		try {
 			// perform search to check number of children and hierarchy depth
-			searchNodes(repositoryHelper.getCompanyHome(), new ArrayList<Pair<String, NodeRef>>());
+			searchNodes(repositoryHelper.getCompanyHome(), new ArrayList<Pair<String, NodeRef>>(), false);
 
 			// save data as content to job node
 			monitorStorage.setMonitorData(actionedUponNodeRef,
@@ -87,15 +87,18 @@ public class MonitorNodesHierarchyAction extends AbstractMonitorExecuterAction {
 	 * @throws Exception
 	 *             - set job status to error
 	 */
-	private void searchNodes(NodeRef nodeRef, List<Pair<String, NodeRef>> nodesHierarchy) throws Exception {
+	private void searchNodes(NodeRef nodeRef, List<Pair<String, NodeRef>> nodesHierarchy, boolean skipDepth) throws Exception {
 		String nodesName = (String) nodeService.getProperty(nodeRef, ContentModel.PROP_NAME);
 		nodesHierarchy.add(new Pair<String, NodeRef>(nodesName, nodeRef));
 
 		// check hierarchy depth
 		if (isHierarchyInRange(nodesHierarchy, hierarchyDepthParam)) {
 			hierarchyCount++;
-			// save node
-			saveNodeAndPath(nodesHierarchy, depthNodes, nodesHierarchy.size());
+			// save node only if this folder structure is not covered
+			if (skipDepth == false) {
+				saveNodeAndPath(nodesHierarchy, depthNodes, nodesHierarchy.size());	
+				skipDepth = true;
+			}
 		}
 
 		// get children
@@ -110,7 +113,7 @@ public class MonitorNodesHierarchyAction extends AbstractMonitorExecuterAction {
 
 		// go through all child associations of node
 		for (ChildAssociationRef assoc : childrenOfNode) {
-			searchNodes(assoc.getChildRef(), new ArrayList<Pair<String, NodeRef>>(nodesHierarchy));
+			searchNodes(assoc.getChildRef(), new ArrayList<Pair<String, NodeRef>>(nodesHierarchy), skipDepth);
 		}
 	}
 
