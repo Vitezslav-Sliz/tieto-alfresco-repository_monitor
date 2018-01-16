@@ -54,9 +54,9 @@
     	<property name="monitorStorage" ref="health-monitor-repo_MonitorStorage"/>
 		<property name="transactionHelper" ref="retryingTransactionHelper"/>
 		<property name="searchService" ref="searchService" />
-		<property name="hierarchyDepth" value="#{nodes.hierarchy.depth}" />
-		<property name="numberOfNodes" value="#{nodes.hierarchy.numberOfNodes}" />
-		<property name="sourcePathName" value="#{nodes.hierarchy.pathName}" />
+		<property name="hierarchyDepth" value="${nodes.hierarchy.depth}" />
+		<property name="numberOfNodes" value="${nodes.hierarchy.numberOfNodes}" />
+		<property name="sourcePathName" value="${nodes.hierarchy.pathName}" />
 	</bean>
 	
 	<bean id="health-monitor-repo_MonitorJobSitesCount" class="com.tieto.ecm.alfresco.monitor.service.job.SitesCountJobImpl" parent="baseJavaScriptExtension">
