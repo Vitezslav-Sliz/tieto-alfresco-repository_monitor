@@ -26,6 +26,17 @@ Those healthy checks are inspired by [Luis Cabaceira](https://community.alfresco
 ### Group hierarchy
 	- Combine group list in the same manner as previous task
 
+## Results from DevCon 2018
+	- Created jobs for each webscript with default values in alfresco-global.properties
+	- Folder hierarchy depth shows only "top" folder and nested folders are not displayed
+	- Add more props to Folder hierarchy section. For example (Run By, Job parameters)
+	- Add datetime to "Select job" drop-down list
+	- Other fixes and refactoring
+	- Solution to fix a problem with many nodes under a folder		
+		- At the moment, it is ased on type of node
+		- Only in organize-nodes branch
+		- It could be separated as different addon
+
 ## Implementation
 
 ### Jobs
