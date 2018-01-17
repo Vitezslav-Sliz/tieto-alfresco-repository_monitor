@@ -36,6 +36,11 @@ Those healthy checks are inspired by [Luis Cabaceira](https://community.alfresco
 		- At the moment, it is based on type of node
 		- Only in organize-nodes branch
 		- It could be separated as different add-on
+### Screenshots of current solution
+![Folder hierarchy](https://github.com/Vitezslav-Sliz/tieto-alfresco-repository_monitor/blob/master/screenshots/folder-hierarchy.PNG?raw=true "Folder hierarchy")
+
+![Organize nodes](https://github.com/Vitezslav-Sliz/tieto-alfresco-repository_monitor/raw/master/screenshots/organize-nodes.PNG?raw=true "Folder hierarchy")
+
 
 ## Implementation
 
