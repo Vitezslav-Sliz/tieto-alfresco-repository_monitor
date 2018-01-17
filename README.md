@@ -33,9 +33,9 @@ Those healthy checks are inspired by [Luis Cabaceira](https://community.alfresco
 	- Add datetime to "Select job" drop-down list
 	- Other fixes and refactoring
 	- Solution to fix a problem with many nodes under a folder		
-		- At the moment, it is ased on type of node
+		- At the moment, it is based on type of node
 		- Only in organize-nodes branch
-		- It could be separated as different addon
+		- It could be separated as different add-on
 
 ## Implementation
 
