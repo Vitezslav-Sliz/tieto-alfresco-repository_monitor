@@ -49,6 +49,8 @@ $(function() {
 			$("#server").text(data.server);
 			$("#runBy").text(data.runBy);
 			$("#completedTime").text(data.completedTime);
+			$("#numberOfNodeParameter").text(data.numberOfNodeParameter);
+			$("#nodesHierarchyParameter").text(data.nodesHierarchyParameter);
 			AdminFH.renderCount(data.data.count);
 			AdminFH.renderDepth(data.data.depth);
 			$(".path").shorten();

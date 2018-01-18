@@ -8,6 +8,8 @@
 			Server: <span id="server"></span></br>
 			Run by: <span id="runBy"></span></br>
 			Completed in: <span id="completedTime"></span></br>
+			Node count limit: <span id="numberOfNodeParameter"></span></br>
+			Depth limit: <span id="nodesHierarchyParameter"></span></br>
 	    </div>
 	    <div class="info-container-block">
 	    	<span id="job-select-label">Select job:</span></br>
